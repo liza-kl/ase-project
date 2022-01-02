@@ -23,9 +23,9 @@
 hs_err_pid*
 
 #idea folder
-.idea
+.idea/
 *.env
 
 #gradle
-./build
-.gradle
+.gradle/
+.build/
