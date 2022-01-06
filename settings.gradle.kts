@@ -2,5 +2,7 @@ rootProject.name = "ase-project"
 
 include(
     ":domain",
-    ":application"
+    ":use-cases",
+    ":adapters",
+    ":plugins",
 )
