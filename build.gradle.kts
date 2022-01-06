@@ -9,10 +9,10 @@ plugins {
     kotlin("jvm") version "1.6.10"
 }
 
-group = "dev.li54"
+group = "de.dhbw.ka"
 version = "0.0.1"
 application {
-    mainClass.set("dev.li54.ApplicationKt")
+    mainClass.set("de.dhbw.ka.ApplicationKt")
 }
 
 repositories {

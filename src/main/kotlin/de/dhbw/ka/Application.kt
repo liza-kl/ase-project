@@ -1,11 +1,11 @@
-package dev.li54
+package de.dhbw.ka
 
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import dev.li54.plugins.*
+import de.dhbw.ka.plugins.*
 
 fun main() {
-    embeddedServer(Netty, port = 8081, host = "0.0.0.0") {
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         configureRouting()
     }.start(wait = true)
 }
