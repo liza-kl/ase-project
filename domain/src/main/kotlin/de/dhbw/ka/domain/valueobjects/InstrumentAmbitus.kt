@@ -3,6 +3,7 @@ package de.dhbw.ka.domain.valueobjects
 import kotlin.math.absoluteValue
 
 data class InstrumentAmbitus(val firstTone: String, val lastTone: String) {
+    val generatedAmbitus : String;
 
     private fun generateTuneMap() : HashMap<String, Int> {
         val tuneMap : HashMap<String, Int> = HashMap<String, Int> ();
@@ -29,7 +30,6 @@ data class InstrumentAmbitus(val firstTone: String, val lastTone: String) {
         return true;
     }
 
-    val generatedAmbitus : String;
     init {
         require(checkFormalities(firstTone,lastTone)) {
             "The ambitus $firstTone-$lastTone is not valid because the first tone can't be higher than the last tone!"
