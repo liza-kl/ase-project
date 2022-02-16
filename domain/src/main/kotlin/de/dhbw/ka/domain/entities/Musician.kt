@@ -1,4 +1,4 @@
-package de.dhbw.ka.domain.aggregates
+package de.dhbw.ka.domain.entities
 
 import de.dhbw.ka.domain.entities.Instrument
 import de.dhbw.ka.domain.entities.MusicSocietyMember
@@ -8,7 +8,7 @@ class Musician(var instrument: Instrument, var musicSocietyMember: MusicSocietyM
         if(this.instrument === newInstrument) {
             throw IllegalArgumentException("Sorry, the musician is already playing this instrument")
         }
-        this.instrument = newInstrument;
+        this.instrument = newInstrument
     }
 
     fun createMusician() {
