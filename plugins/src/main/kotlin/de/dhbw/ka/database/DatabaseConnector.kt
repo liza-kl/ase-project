@@ -1,4 +1,4 @@
-package de.dhbw.ka
+package de.dhbw.ka.database
 import org.jetbrains.exposed.exceptions.ExposedSQLException
 import org.jetbrains.exposed.sql.*
 import io.github.cdimascio.dotenv.dotenv

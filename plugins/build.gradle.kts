@@ -22,6 +22,5 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
-
 }
 
