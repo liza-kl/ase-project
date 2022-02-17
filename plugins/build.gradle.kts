@@ -11,15 +11,13 @@ application {
 }
 
 dependencies {
+    implementation(projects.domain)
     implementation(projects.useCases)
     implementation(projects.adapters)
     implementation("io.ktor:ktor-server-core:1.6.7")
     implementation("io.ktor:ktor-server-netty:1.6.7")
     implementation("ch.qos.logback:logback-classic:1.2.10")
-    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.postgresql:postgresql:42.3.2")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("io.github.cdimascio:dotenv-kotlin:6.2.2")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
 

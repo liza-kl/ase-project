@@ -1,10 +1,7 @@
 package de.dhbw.ka.database
-import org.jetbrains.exposed.exceptions.ExposedSQLException
-import org.jetbrains.exposed.sql.*
-import io.github.cdimascio.dotenv.dotenv
 
 class DatabaseConnector {
-    private val dotenv = dotenv()
+  /*  private val dotenv = dotenv()
     fun connectToMusicSocietyDB() {
         try {
             Database.connect(
@@ -17,5 +14,5 @@ class DatabaseConnector {
         } catch (ex : ExposedSQLException) {
             println("Something went wrong with the Database Connection $ex")
         }
-    }
+    } */
 }

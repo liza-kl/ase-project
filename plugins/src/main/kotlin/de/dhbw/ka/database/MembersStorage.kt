@@ -1,5 +1,5 @@
 package de.dhbw.ka.database
 
-import de.dhbw.ka.dtos.MemberDTO
+import de.dhbw.ka.domain.entities.Member
 
-val memberStorage = mutableListOf<MemberDTO>()
+val memberStorage = mutableListOf<Member>()

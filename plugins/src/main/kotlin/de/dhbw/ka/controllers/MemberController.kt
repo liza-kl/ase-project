@@ -1,7 +1,8 @@
 package de.dhbw.ka.controllers
 
 import de.dhbw.ka.database.memberStorage
-import de.dhbw.ka.dtos.MemberDTO
+import de.dhbw.ka.domain.entities.Member
+import de.dhbw.ka.repository.MembersRepoImpl
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -20,8 +21,9 @@ fun Route.getMembers() {
 
 fun Route.addMember() {
     post("/members") {
-        val memberToAdd = call.receive<MemberDTO>();
-        memberStorage.add(memberToAdd);
+        val databla = MembersRepoImpl(memberStorage);
+        val test = call.receive<Member>();
+        databla.addMember(test)
         call.respondText("Member stored correctly", status = HttpStatusCode.Created)
     }
 }
