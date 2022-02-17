@@ -1,11 +1,13 @@
 val kotestVersion: String by project
 val kotlinVersion: String by project
+val ktorVersion: String by project
 
 group = "de.dhbw.ka"
 version = "0.0.1"
 
 plugins {
     kotlin("jvm") version "1.6.10"
+    kotlin("plugin.serialization") version "1.6.10"
 }
 
 repositories {
@@ -22,11 +24,13 @@ tasks.test {
 
 subprojects {
     apply(plugin = "kotlin")
+    apply(plugin = "kotlinx-serialization")
     repositories {
         mavenCentral()
     }
 
 dependencies {
+    implementation("io.ktor:ktor-serialization:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
