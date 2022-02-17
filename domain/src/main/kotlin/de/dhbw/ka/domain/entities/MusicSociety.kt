@@ -1,5 +1,5 @@
 package de.dhbw.ka.domain.entities
 
-class MusicSociety(val members: MusicSocietyMember, val name: String) {
+class MusicSociety(val members: Member, val name: String) {
 
 }
