@@ -1,8 +1,8 @@
 package de.dhbw.ka
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
 fun Application.configureRouting() {
 

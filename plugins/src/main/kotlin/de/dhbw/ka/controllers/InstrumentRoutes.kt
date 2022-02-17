@@ -1,23 +1,18 @@
 package de.dhbw.ka.controllers
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.application.*
+import io.ktor.response.*
+import io.ktor.routing.*
 
-import io.ktor.server.request.*
-
-fun Application.getInstrumentsRoute() {
-    routing {
+fun Route.getInstrumentsRoute() {
         get("/instruments") {
-            call.respondText {
-                "bla"
-            }
+            call.respondText("Instruments")
         }
-        post {
-          //  val customer = call.receive<MemberDTO>()
+}
 
-        }
+fun Application.registerInstrumentController() {
+    routing {
+        getInstrumentsRoute()
     }
-
 }
 

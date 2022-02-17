@@ -12,6 +12,8 @@ application {
 
 dependencies {
     implementation(projects.useCases)
+    implementation(projects.adapters)
+    implementation("io.ktor", "ktor-gson", "1.6.7")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
