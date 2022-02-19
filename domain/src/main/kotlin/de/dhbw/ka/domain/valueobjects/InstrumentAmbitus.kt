@@ -42,6 +42,6 @@ data class InstrumentAmbitus(val firstTone: String, val lastTone: String) {
     }
 }
 
-fun String.toInstrumentAmbitus(firstTone: String, lastTone: String): InstrumentAmbitus {
-    return InstrumentAmbitus(firstTone, lastTone);
+fun String.toInstrumentAmbitus() : InstrumentAmbitus {
+    return InstrumentAmbitus(this, this);
 }
