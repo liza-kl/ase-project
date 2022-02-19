@@ -36,4 +36,12 @@ data class InstrumentAmbitus(val firstTone: String, val lastTone: String) {
         }
         generatedAmbitus  = "$firstTone - $lastTone";
     }
+
+    override fun toString(): String {
+        return generatedAmbitus
+    }
+}
+
+fun String.toInstrumentAmbitus(firstTone: String, lastTone: String): InstrumentAmbitus {
+    return InstrumentAmbitus(firstTone, lastTone);
 }
