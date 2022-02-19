@@ -3,6 +3,7 @@ package de.dhbw.ka.server
 import de.dhbw.ka.configureRouting
 import de.dhbw.ka.controllers.registerInstrumentController
 import de.dhbw.ka.controllers.registerMemberController
+import de.dhbw.ka.database.DatabaseFactory
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.serialization.*
@@ -16,6 +17,8 @@ fun Application.module(testing : Boolean = false) {
     install(ContentNegotiation) {
         json()
     }
+    DatabaseFactory.init()
+
     configureRouting()
     registerMemberController()
     registerInstrumentController()

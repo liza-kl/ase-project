@@ -1,7 +1,7 @@
 package de.dhbw.ka.domain.aggregates
 
-import de.dhbw.ka.domain.entities.Musician
+import de.dhbw.ka.domain.entities.Member
 
-class MusicGroup(val name: String, val musicGroupMembers: List<Musician>) {
+class MusicGroup(val name: String, val musicGroupMembers: List<Member>) {
 
 }

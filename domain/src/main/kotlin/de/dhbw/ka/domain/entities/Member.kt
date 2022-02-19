@@ -1,15 +1,12 @@
 package de.dhbw.ka.domain.entities
 
-class Member(val id: Int, val name: String, val memberStatus: String)  {
+import de.dhbw.ka.domain.valueobjects.MemberStatus
 
-    init {
-        require(name.length > 5) {
-            "The name can't be less than 5 chars"
-        }
-    }
-}
+data class Member(
+    val id: Int,
+    val forename: String,
+    val surname: String,
+    val memberStatus: MemberStatus
+    )
 
-enum class MemberStatus {
-    ACTIVE,
-    PASSIVE
-}
+
