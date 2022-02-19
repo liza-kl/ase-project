@@ -5,7 +5,8 @@ import org.jetbrains.exposed.sql.Table
 
 object MemberTable : Table() {
     val id: Column<Int> = integer("id").autoIncrement()
-    val name: Column<String> = varchar("name", 50)
-    val status: Column<String> = varchar("status",50)
+    val forename: Column<String> = varchar("name", 50)
+    val surname: Column<String> = varchar("status",50)
+    val memberStatus: Column<String> = varchar("status",50)
     override val primaryKey = PrimaryKey(id)
 }
