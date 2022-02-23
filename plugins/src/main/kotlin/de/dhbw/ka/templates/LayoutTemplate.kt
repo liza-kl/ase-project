@@ -18,10 +18,10 @@ class LayoutTemplate: Template<HTML> {
                 insert(header)
             }
             div("container vw-100 vh-100 d-flex justify-content-center align-items-center") {
+                div("row") { h1 { + "Verwaltung Musikverein"} }
                 div("row") {
                     div("col-md-3")
                     div("col-12 col-md-6") {
-                        h1 { + "Verwaltung Musikverein"}
                         insert(ContentTemplate(), content)}
                     div("col-md-3")
                 }
