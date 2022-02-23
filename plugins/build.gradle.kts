@@ -25,6 +25,7 @@ dependencies {
     implementation("com.h2database:h2:1.4.200")
     implementation("com.zaxxer:HikariCP:5.0.1")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+    implementation("io.ktor:ktor-html-builder:$ktorVersion")
 
 }
 
