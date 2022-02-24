@@ -1,34 +1,23 @@
 package de.dhbw.ka.controllers
 
-import de.dhbw.ka.domain.valueobjects.toMemberStatus
-import de.dhbw.ka.dto.CreateMember
-import de.dhbw.ka.repository.MembersRepoImpl
-import de.dhbw.ka.services.MemberService
+import de.dhbw.ka.domain.entities.Member
+import de.dhbw.ka.members.GetAllMembers
 import io.ktor.application.*
 import io.ktor.http.*
-import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Route.getMembers() {
         get("/members") {
-          call.respondText { "" }
+        val members : List<Member> = GetAllMembers().execute();
+          call.respondText { members.toString()  }
         }
 }
 
 fun Route.addMember() {
     post("/members") {
-        val data = call.receiveParameters().toCreateMember()
-        val repo = MemberService(MembersRepoImpl()).create(data)
-        call.respond(HttpStatusCode.OK, repo)
+        call.respond(HttpStatusCode.OK, "")
     }
-}
-private fun Parameters.toCreateMember(): CreateMember {
-    return CreateMember(
-        forename = this["forename"]!!,
-        surname = this["surname"]!!,
-        memberStatus = this["memberStatus"]!!.toMemberStatus()
-    )
 }
 
 fun Application.registerMemberController() {

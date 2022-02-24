@@ -4,7 +4,7 @@ import io.ktor.html.*
 import kotlinx.html.*
 
 class LayoutTemplate: Template<HTML> {
-    val header = Placeholder<FlowContent>()
+    private val header = Placeholder<FlowContent>()
     val content = TemplatePlaceholder<ContentTemplate>()
     override fun HTML.apply() {
         head {
@@ -23,7 +23,8 @@ class LayoutTemplate: Template<HTML> {
                     div("col-md-3")
                     div("col-12 col-md-6") {
                         insert(ContentTemplate(), content)}
-                    div("col-md-3")
+                    div("col-md-3") {
+                    }
                 }
             }
             script{src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"}

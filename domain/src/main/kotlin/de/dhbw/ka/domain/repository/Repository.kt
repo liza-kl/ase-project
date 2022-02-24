@@ -1,4 +1,4 @@
-package de.dhbw.ka.domain.repositories
+package de.dhbw.ka.domain.repository
 
 interface Repository {
     interface Repository<Entity : Any, ID : Any> {

@@ -1,4 +1,4 @@
-package de.dhbw.ka.domain.repositories
+package de.dhbw.ka.domain.repository
 
 import de.dhbw.ka.domain.entities.Instrument
 
