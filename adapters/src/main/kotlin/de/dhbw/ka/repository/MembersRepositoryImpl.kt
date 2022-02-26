@@ -3,12 +3,13 @@ package de.dhbw.ka.repository
 import de.dhbw.ka.datatables.MemberTable
 import de.dhbw.ka.domain.entities.Member
 import de.dhbw.ka.domain.repository.MemberRepository
-import de.dhbw.ka.domain.valueobjects.MemberName
-import de.dhbw.ka.domain.valueobjects.MemberStatus
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.statements.DeleteStatement.Companion.all
 import org.jetbrains.exposed.sql.transactions.transaction
 
-class MembersRepositoryImpl() : MemberRepository {
+// In der Implementierung soll nur Daten da sein, keine Logik.
+class MembersRepositoryImpl(private val table : MemberTable) : MemberRepository {
 
     override fun create(input: Member) : Boolean {
         transaction {
@@ -30,11 +31,7 @@ class MembersRepositoryImpl() : MemberRepository {
     }
 
     override fun findAll(): List<Member> {
-        return listOf(
-            Member(1, MemberName("Max", "Mustermann"), MemberStatus(1)),
-            Member(2, MemberName("Tanja", "Musterfrau"), MemberStatus(1)),
-            Member(3, MemberName("Alina", "Mustermann"), MemberStatus(1))
-        )
+        return MemberTable.selectAll().map {it -> it.toString}
     }
 
 }
