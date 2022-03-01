@@ -1,10 +1,10 @@
 package de.dhbw.ka.storage
 
-import de.dhbw.ka.domain.entities.Member
+import de.dhbw.ka.dto.MemberDTO
 
 interface MemberStorage {
-    fun create(input: Member) : Boolean
-    fun findById(id: Int) : Member?
+    fun create(input: MemberDTO) : Boolean
+    fun findById(id: Int) : MemberDTO?
     fun update(id: Int)
-    fun findAll() : List<Member>
+    fun findAll() : List<MemberDTO>
 }
