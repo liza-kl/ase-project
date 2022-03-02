@@ -5,9 +5,9 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Route.getInstrumentsRoute() {
-        get("/instruments") {
-            call.respondText("Instruments")
-        }
+    get("/instruments") {
+        call.respondText("Instruments")
+    }
 }
 
 fun Application.registerInstrumentController() {

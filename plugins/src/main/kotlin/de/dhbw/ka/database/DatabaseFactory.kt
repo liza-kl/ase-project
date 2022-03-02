@@ -26,8 +26,8 @@ object DatabaseFactory {
         transaction {
             MemberTable.insert {
                 it[this.forename] = "Vika"
-                it[this.surname] = "Akiv"
-                it[this.memberStatus] = "1"
+                it[this.lastname] = "Akiv"
+                it[this.memberStatus] = 1
             }
 
         }
