@@ -8,7 +8,7 @@ import de.dhbw.ka.storage.MemberStorage
 
 class MembersRepositoryImpl(private val memberStorage: MemberStorage) : MemberRepository {
 
-    override fun create(input: Member) {
+    override fun create(input: Member): Boolean {
         val memberDTO = toMemberDTO(input)
         return memberStorage.create(memberDTO)
     }

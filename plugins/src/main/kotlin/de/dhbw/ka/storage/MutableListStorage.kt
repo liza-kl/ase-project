@@ -9,8 +9,9 @@ val memberStorage = mutableListOf<MemberDTO>(
 )
 
 class MutableListStorage : MemberStorage {
-    override fun create(input: MemberDTO) {
+    override fun create(input: MemberDTO): Boolean {
         memberStorage.add(input)
+        return true
     }
 
     override fun findById(id: Int): MemberDTO? {

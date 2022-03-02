@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class H2MemberStorage : MemberStorage {
 
-    override fun create(input: MemberDTO) {
+    override fun create(input: MemberDTO): Boolean {
         TODO("Not yet implemented")
     }
 
