@@ -6,8 +6,7 @@ POST http://127.0.0.1:9000/members
 Content-Type: application/json
 
 {
-  "id": 4,
-  "firstName": "Mia",
+  "firstName": "Jonas",
   "lastName": "Miu",
   "memberStatus": "ACTIVE"
 }

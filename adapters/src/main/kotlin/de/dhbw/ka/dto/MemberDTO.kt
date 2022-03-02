@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.ResultRow
 
 @Serializable
-data class MemberDTO(val id: Int = -1, val firstName: String, val lastName: String, val memberStatus: String) {
+data class MemberDTO(var id: Int = -1, val firstName: String, val lastName: String, val memberStatus: String) {
     companion object MemberMapper {
         fun resultRowToMemberDTO(resultRow: ResultRow): MemberDTO {
             return MemberDTO(
