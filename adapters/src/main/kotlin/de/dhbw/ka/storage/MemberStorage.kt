@@ -3,7 +3,7 @@ package de.dhbw.ka.storage
 import de.dhbw.ka.dto.MemberDTO
 
 interface MemberStorage {
-    fun create(input: MemberDTO) : Boolean
+    fun create(input: MemberDTO)
     fun findById(id: Int) : MemberDTO?
     fun update(id: Int)
     fun findAll() : List<MemberDTO>

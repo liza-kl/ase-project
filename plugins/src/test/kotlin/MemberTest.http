@@ -2,11 +2,12 @@ GET http://127.0.0.1:9000/members
 Content-Type: application/json
 
 ###
-
 POST http://127.0.0.1:9000/members
 Content-Type: application/json
 
 {
- "name": "Mia"
+  "id": 4,
+  "firstName": "Mia",
+  "lastName": "Miu",
+  "memberStatus": "ACTIVE"
 }
-

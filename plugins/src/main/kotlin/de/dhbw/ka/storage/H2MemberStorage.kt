@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class H2MemberStorage : MemberStorage {
 
-    override fun create(input: MemberDTO): Boolean {
+    override fun create(input: MemberDTO) {
         TODO("Not yet implemented")
     }
 
@@ -28,6 +28,6 @@ class H2MemberStorage : MemberStorage {
                 membersList.add(mappedResult)
             }
         }
-        return membersList;
+        return membersList
     }
 }
