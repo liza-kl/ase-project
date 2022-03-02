@@ -1,4 +1,4 @@
-package de.dhbw.ka.database
+package de.dhbw.ka.storage
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -27,7 +27,7 @@ object DatabaseFactory {
             MemberTable.insert {
                 it[this.forename] = "Vika"
                 it[this.lastname] = "Akiv"
-                it[this.memberStatus] = 1
+                it[this.memberStatus] = "PASSSS"
             }
 
         }

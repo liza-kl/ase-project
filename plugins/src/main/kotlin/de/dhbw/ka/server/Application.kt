@@ -4,7 +4,7 @@ import de.dhbw.ka.configureRouting
 import de.dhbw.ka.controllers.registerInstrumentController
 import de.dhbw.ka.controllers.registerMemberController
 import de.dhbw.ka.controllers.registerMusicGroupController
-import de.dhbw.ka.database.DatabaseFactory
+import de.dhbw.ka.storage.DatabaseFactory
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.serialization.*

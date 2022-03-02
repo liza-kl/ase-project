@@ -1,14 +1,13 @@
-package de.dhbw.ka.database
+package de.dhbw.ka.storage
 
 import de.dhbw.ka.dto.MemberDTO
-import de.dhbw.ka.storage.MemberStorage
 
 class MutableListStorage : MemberStorage {
 
     private val memberStorage = mutableListOf<MemberDTO>(
-        MemberDTO(1,"Celine","Müller",1),
-        MemberDTO(2,"Shanti","Müller",1),
-        MemberDTO(3,"Max","Müller",1)
+        MemberDTO(1,"Celine","Müller","OINK"),
+        MemberDTO(2,"Shanti","Müller","ACTIVE"),
+        MemberDTO(3,"Max","Müller","PASSIVE")
     )
 
     override fun create(input: MemberDTO): Boolean {

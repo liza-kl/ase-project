@@ -1,9 +1,10 @@
 package de.dhbw.ka.controllers
 
-import de.dhbw.ka.database.MutableListStorage
+import de.dhbw.ka.storage.MutableListStorage
 import de.dhbw.ka.domain.entities.Member
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.dto.MemberDTO
+import de.dhbw.ka.dto.MemberStatusDTO
 import de.dhbw.ka.members.GetAllMembers
 import de.dhbw.ka.repository.MembersRepositoryImpl
 import io.ktor.application.*
@@ -13,7 +14,11 @@ import io.ktor.routing.*
 
 
 private fun toMemberDTO(input: Member): MemberDTO {
-    return MemberDTO(id = input.id, firstName = input.memberName.firstName, lastName = input.memberName.lastName)
+    return MemberDTO(
+        id = input.id,
+        firstName = input.memberName.firstName,
+        lastName = input.memberName.lastName,
+        memberStatus = input.memberStatus.toString())
 }
 
 fun Route.getMembers() {
