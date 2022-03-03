@@ -14,11 +14,16 @@ class LayoutTemplate : Template<HTML> {
             link(rel = "stylesheet", href = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css")
         }
         body {
+            nav(classes = "navbar navbar-light bg-light fixed-top") {
+                a(href = "#", target = "", classes = "navbar-brand") {
+                    b("ml-1") { +"Verwaltung Musikverein" }
+                }
+            }
             h1 {
                 insert(header)
             }
             div("container vw-100 vh-100 d-flex justify-content-center align-items-center") {
-                div("row") { h1 { +"Verwaltung Musikverein" } }
+                div("row") {}
                 div("row") {
                     div("col-md-3")
                     div("col-12 col-md-6") {
