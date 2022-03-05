@@ -32,7 +32,7 @@ data class InstrumentAmbitus(val firstTone: String, val lastTone: String) {
 
     init {
         require(checkFormalities(firstTone,lastTone)) {
-            "The ambitus $firstTone-$lastTone is not valid because the first tone can't be higher than the last tone!"
+            "The instrumentAmbitus $firstTone-$lastTone is not valid because the first tone can't be higher than the last tone!"
         }
         generatedAmbitus  = "$firstTone - $lastTone";
     }

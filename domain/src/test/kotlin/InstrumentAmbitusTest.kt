@@ -33,7 +33,7 @@ class InstrumentAmbitusTest : FunSpec({
         exception.message shouldBe("The first tone can't be higher than the last one")
     }
 
-    test("Generated ambitus should be c1 - c2") {
+    test("Generated instrumentAmbitus should be c1 - c2") {
         val ambitus = InstrumentAmbitus("c1", "c2")
         ambitus.generatedAmbitus shouldBe "c1 - c2"
     }

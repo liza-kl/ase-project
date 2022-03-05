@@ -6,7 +6,7 @@ import de.dhbw.ka.domain.valueobjects.MemberStatus
 data class Member(
     var id: Int,
     val memberName : MemberName,
-    val memberStatus: MemberStatus
+    val memberStatus: MemberStatus,
     )
 
 

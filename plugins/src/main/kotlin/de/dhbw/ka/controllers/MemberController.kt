@@ -30,6 +30,14 @@ fun Route.getMembers() {
     }
 }
 
+fun Route.getMemberById() {
+
+}
+
+fun Route.borrowInstrument() {
+
+}
+
 fun Route.addMember() {
     post("/members") {
         val receivedMemberParams = call.receive<MemberDTO>()
