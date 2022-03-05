@@ -1,4 +1,4 @@
-package de.dhbw.ka.instruments
+package de.dhbw.ka.lentinstruments
 
 import de.dhbw.ka.domain.entities.Instrument
 import de.dhbw.ka.domain.entities.Member

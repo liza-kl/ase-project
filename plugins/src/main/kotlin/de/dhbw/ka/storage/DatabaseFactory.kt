@@ -25,10 +25,14 @@ object DatabaseFactory {
     private fun sampleMembers() {
         transaction {
             MemberTable.insert {
-                it[this.id] = 12345
-                it[this.forename] = "Vika"
-                it[this.lastname] = "Akiv"
+                it[this.firstName] = "Vika"
+                it[this.lastName] = "Akiv"
                 it[this.memberStatus] = "ACTIVE"
+            }
+            MemberTable.insert {
+                it[this.firstName] = "Sophie"
+                it[this.lastName] = "Müller"
+                it[this.memberStatus] = "PASSIVE"
             }
 
         }

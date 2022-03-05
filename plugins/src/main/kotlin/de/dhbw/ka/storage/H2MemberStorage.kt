@@ -3,13 +3,22 @@ package de.dhbw.ka.storage
 import de.dhbw.ka.datatables.MemberTable
 import de.dhbw.ka.dto.MemberDTO
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.resultRowToMemberDTO
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class H2MemberStorage : MemberStorage {
 
     override fun create(input: MemberDTO): Boolean {
-        TODO("Not yet implemented")
+        transaction {
+            MemberTable.insert {
+                it[firstName] = input.firstName
+                it[lastName] = input.lastName
+                it[memberStatus] = input.memberStatus
+            }
+        }
+        return true
     }
 
     override fun findById(id: Int): MemberDTO? {
