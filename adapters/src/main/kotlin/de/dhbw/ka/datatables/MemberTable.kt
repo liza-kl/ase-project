@@ -8,5 +8,5 @@ object MemberTable : Table() {
     val firstName: Column<String> = varchar("firstname", 50)
     val lastName: Column<String> = varchar("lastname",50)
     val memberStatus: Column<String> = varchar("memberstatus",50)
-    override val primaryKey = PrimaryKey(id, name = "PK_MemberTable_Id") // PK_StarWarsFilms_Id is optional here
+    override val primaryKey = PrimaryKey(id, name = "PK_MemberTable_Id")
 }
