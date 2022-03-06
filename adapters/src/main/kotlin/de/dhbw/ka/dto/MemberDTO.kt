@@ -1,8 +1,6 @@
 package de.dhbw.ka.dto
 
 import de.dhbw.ka.datatables.MemberTable
-import de.dhbw.ka.datatables.MemberTable.id
-
 import de.dhbw.ka.domain.entities.Member
 import de.dhbw.ka.domain.valueobjects.MemberName
 import de.dhbw.ka.domain.valueobjects.MemberStatus
