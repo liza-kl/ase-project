@@ -5,6 +5,8 @@ enum class MemberStatusOptions { ACTIVE, PASSIVE }
 @JvmInline
 value class MemberStatus(val status: String) {
     init {
-        MemberStatusOptions.valueOf(status)
+        require(MemberStatusOptions.valueOf(status).toString() == status) {
+            throw IllegalArgumentException("Please provide a valid member status, either 'ACTIVE' or 'PASSIVE'")
+        }
     }
 }
