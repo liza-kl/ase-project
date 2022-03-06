@@ -6,10 +6,10 @@ import de.dhbw.ka.dto.MemberDTO
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.toMember
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.toMemberDTO
 import de.dhbw.ka.members.CreateNewMember
+import de.dhbw.ka.members.FindMemberById
 import de.dhbw.ka.members.GetAllMembers
 import de.dhbw.ka.repository.MembersRepositoryImpl
 import de.dhbw.ka.storage.H2MemberStorage
-import de.dhbw.ka.storage.MutableListStorage
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -32,6 +32,12 @@ fun Route.getMembers() {
 }
 
 fun Route.getMemberById() {
+    get("members/{id}") {
+        val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
+        val findMemberByIdUC = FindMemberById(memberRepository = memberRepository)
+        val memberResult : Member? = call.parameters["id"]?.let { it1 -> findMemberByIdUC.execute(it1.toInt()) }
+        call.respondText { "Found the member: $memberResult!" }
+    }
 
 }
 
@@ -48,6 +54,7 @@ fun Route.addMember() {
 fun Application.registerMemberController() {
     routing {
         getMembers()
+        getMemberById()
         addMember()
     }
 }
