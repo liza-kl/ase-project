@@ -14,8 +14,8 @@ class MutableListStorage : MemberStorage {
         return true
     }
 
-    override fun findById(id: Int): MemberDTO? {
-        return memberStorage.find { it.id == id }
+    override fun findById(memberId: Int): MemberDTO? {
+        return memberStorage.find { it.id == memberId }
     }
 
     override fun update(id: Int) {
