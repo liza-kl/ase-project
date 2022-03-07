@@ -2,8 +2,6 @@ import de.dhbw.ka.domain.valueobjects.InstrumentAmbitus
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import kotlin.test.BeforeTest
-
 
 class InstrumentAmbitusTest : FunSpec({
 
