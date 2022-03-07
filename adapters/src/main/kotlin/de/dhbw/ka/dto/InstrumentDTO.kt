@@ -1,6 +1,10 @@
 package de.dhbw.ka.dto
 
+import de.dhbw.ka.datatables.InstrumentTable
 import de.dhbw.ka.domain.entities.Instrument
+import de.dhbw.ka.domain.valueobjects.InstrumentCategory
+import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
+import org.jetbrains.exposed.sql.ResultRow
 
 @kotlinx.serialization.Serializable
 data class InstrumentDTO(
@@ -8,17 +12,36 @@ data class InstrumentDTO(
     val instrumentManufacturer: String,
     val instrumentSerialNumber: String,
     val instrumentCategory: String,
-    val instrumentAmbitus: String
 ) {
     companion object InstrumentMapper {
-        fun resultRowToInstrumentDTO() : Instrument {
-            TODO("Not yet implemented")
+        fun resultRowToInstrumentDTO(resultRow: ResultRow): InstrumentDTO {
+            return InstrumentDTO(
+                instrumentType = resultRow[InstrumentTable.instrumentType],
+                instrumentManufacturer = resultRow[InstrumentTable.instrumentManufacturer],
+                instrumentSerialNumber = resultRow[InstrumentTable.instrumentSerialNumber],
+                instrumentCategory = resultRow[InstrumentTable.instrumentCategory],
+            )
         }
-        fun toInstrumentDTO() : InstrumentDTO {
-            TODO("Not yet implemented")
+        fun toInstrumentDTO(instrumentEntity: Instrument): InstrumentDTO {
+            val instrumentIdentification = instrumentEntity.instrumentIdentification
+            return InstrumentDTO(
+                instrumentType = instrumentIdentification.instrumentType,
+                instrumentManufacturer = instrumentIdentification.instrumentType,
+                instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
+                instrumentCategory = instrumentEntity.instrumentCategory.instrumentCategory,
+            )
         }
-        fun toInstrument() : Instrument {
-            TODO("Not yet implemented")
+        fun toInstrument(instrumentDTO: InstrumentDTO): Instrument {
+            return Instrument(
+                instrumentIdentification = InstrumentIdentification(
+                    instrumentManufacturer = instrumentDTO.instrumentManufacturer,
+                    instrumentSerialNumber = instrumentDTO.instrumentSerialNumber,
+                    instrumentType = instrumentDTO.instrumentType
+                ),
+                instrumentCategory = InstrumentCategory(
+                    instrumentCategory = instrumentDTO.instrumentCategory
+                )
+            )
         }
     }
 }
