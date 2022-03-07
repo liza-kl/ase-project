@@ -1,0 +1,10 @@
+POST http://127.0.0.1:9000/instruments
+Content-Type: application/json
+
+{
+  "instrumentType": "Oboe",
+  "instrumentManufacturer": "Yamaha",
+  "instrumentSerialNumber": "YOB-241",
+  "instrumentCategory": "WOODWIND"
+}
+

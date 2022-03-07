@@ -2,6 +2,7 @@ package de.dhbw.ka.storage
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import de.dhbw.ka.datatables.InstrumentTable
 import de.dhbw.ka.datatables.MemberTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
@@ -17,7 +18,9 @@ object DatabaseFactory {
         transaction {
             addLogger(StdOutSqlLogger)
             create(MemberTable)
+            create(InstrumentTable)
             sampleMembers()
+            sampleMusicInstruments()
         }
     }
 
@@ -35,6 +38,17 @@ object DatabaseFactory {
                 it[this.memberStatus] = "PASSIVE"
             }
 
+        }
+    }
+
+    private fun sampleMusicInstruments() {
+        transaction {
+            InstrumentTable.insert {
+                it[this.instrumentType] = "French Horn"
+                it[this.instrumentSerialNumber] = "YHR-567D"
+                it[this.instrumentManufacturer] = "Yamaha"
+                it[this.instrumentCategory] = "BRASS"
+            }
         }
     }
 
