@@ -6,10 +6,10 @@ import de.dhbw.ka.domain.repository.LentInstrumentRepository
 import de.dhbw.ka.domain.valueobjects.MemberStatus
 
 class BorrowInstrument(private val lentInstrumentRepository : LentInstrumentRepository) {
-
-    fun execute(memberData: Member, instrumentData: Instrument) {
+    fun execute(memberData: Member, instrumentData: Instrument) : Boolean {
         if(memberData.memberStatus != MemberStatus("ACTIVE")) {
-            throw IllegalArgumentException("Member must be ACTIVE to be able to borrow an instrument ")
+            throw IllegalArgumentException("Member must be ACTIVE to be able to borrow an Instrument")
         }
+        return lentInstrumentRepository.borrowInstrument(memberData.memberId, instrumentData)
     }
 }

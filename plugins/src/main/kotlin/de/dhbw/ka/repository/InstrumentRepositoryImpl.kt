@@ -4,6 +4,7 @@ import de.dhbw.ka.domain.entities.Instrument
 import de.dhbw.ka.domain.repository.InstrumentRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentDTO
+import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrument
 import de.dhbw.ka.storage.InstrumentStorage
 
 class InstrumentRepositoryImpl(private val instrumentStorage: InstrumentStorage) : InstrumentRepository {
@@ -17,6 +18,7 @@ class InstrumentRepositoryImpl(private val instrumentStorage: InstrumentStorage)
     }
 
     override fun getAllInstruments(): List<Instrument> {
-        TODO("Not yet implemented")
+        val result = instrumentStorage.getAllInstruments()
+        return result.map { toInstrument(it) }
     }
 }

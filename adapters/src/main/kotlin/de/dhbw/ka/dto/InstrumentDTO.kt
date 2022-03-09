@@ -5,8 +5,9 @@ import de.dhbw.ka.domain.entities.Instrument
 import de.dhbw.ka.domain.valueobjects.InstrumentCategory
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import org.jetbrains.exposed.sql.ResultRow
+import kotlinx.serialization.Serializable
 
-@kotlinx.serialization.Serializable
+@Serializable
 data class InstrumentDTO(
     val instrumentType: String,
     val instrumentManufacturer: String,
@@ -22,15 +23,17 @@ data class InstrumentDTO(
                 instrumentCategory = resultRow[InstrumentTable.instrumentCategory],
             )
         }
+
         fun toInstrumentDTO(instrumentEntity: Instrument): InstrumentDTO {
             val instrumentIdentification = instrumentEntity.instrumentIdentification
             return InstrumentDTO(
                 instrumentType = instrumentIdentification.instrumentType,
-                instrumentManufacturer = instrumentIdentification.instrumentType,
+                instrumentManufacturer = instrumentIdentification.instrumentManufacturer,
                 instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
                 instrumentCategory = instrumentEntity.instrumentCategory.instrumentCategory,
             )
         }
+
         fun toInstrument(instrumentDTO: InstrumentDTO): Instrument {
             return Instrument(
                 instrumentIdentification = InstrumentIdentification(
