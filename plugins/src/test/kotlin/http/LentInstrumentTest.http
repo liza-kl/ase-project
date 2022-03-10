@@ -1,0 +1,12 @@
+###
+POST http://127.0.0.1:9000/lenting
+Content-Type: application/json
+
+{
+  "memberId": 1,
+  "instrumentIdentification": {
+    "instrumentManufacturer": "Yamaha",
+    "instrumentSerialNumber": "YOB-241",
+    "instrumentType": "Oboe"
+  }
+}
