@@ -3,6 +3,7 @@ package de.dhbw.ka.storage
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import de.dhbw.ka.datatables.InstrumentTable
+import de.dhbw.ka.datatables.LentInstrumentsTable
 import de.dhbw.ka.datatables.MemberTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils.create
@@ -19,11 +20,12 @@ object DatabaseFactory {
             addLogger(StdOutSqlLogger)
             create(MemberTable)
             create(InstrumentTable)
+            create(LentInstrumentsTable)
             sampleMembers()
             sampleMusicInstruments()
+            sampleInstrumentLentings()
         }
     }
-
 
     private fun sampleMembers() {
         transaction {
@@ -52,10 +54,20 @@ object DatabaseFactory {
         }
     }
 
+    private fun sampleInstrumentLentings() {
+        transaction {
+            LentInstrumentsTable.insert {
+                it[this.memberId] = 1
+                it[this.instrumentType] = "French Horn"
+                it[this.instrumentSerialNumber] = "YHR-567D"
+                it[this.instrumentManufacturer] = "Yamaha"
+            }
+        }
+    }
     private fun hikari(): HikariDataSource {
         val config = HikariConfig()
         config.driverClassName = "org.h2.Driver"
-        config.jdbcUrl = "jdbc:h2:mem:test"
+        config.jdbcUrl = "jdbc:h2:mem:musikverwaltung"
         config.maximumPoolSize = 3
         config.isAutoCommit = false
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
