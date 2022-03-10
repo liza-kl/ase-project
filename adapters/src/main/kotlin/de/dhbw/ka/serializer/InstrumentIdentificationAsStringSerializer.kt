@@ -1,12 +1,14 @@
 package de.dhbw.ka.serializer
 
-import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
+import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.descriptors.element
 import kotlinx.serialization.encoding.*
 
 
-object InstrumentIdentificationSerializer : KSerializer<InstrumentIdentification> {
+object InstrumentIdentificationAsStringSerializer : KSerializer<InstrumentIdentificationDTO> {
     override val descriptor: SerialDescriptor =
         buildClassSerialDescriptor("InstrumentIdentification") {
             element<String>("instrumentManufacturer")
@@ -14,7 +16,7 @@ object InstrumentIdentificationSerializer : KSerializer<InstrumentIdentification
             element<String>("instrumentType")
         }
 
-    override fun serialize(encoder: Encoder, value: InstrumentIdentification) {
+    override fun serialize(encoder: Encoder, value: InstrumentIdentificationDTO) {
         encoder.encodeStructure(descriptor) {
             encodeStringElement(descriptor, 0, value.instrumentType)
             encodeStringElement(descriptor, 1, value.instrumentManufacturer)
@@ -22,7 +24,7 @@ object InstrumentIdentificationSerializer : KSerializer<InstrumentIdentification
         }
     }
 
-    override fun deserialize(decoder: Decoder): InstrumentIdentification =
+    override fun deserialize(decoder: Decoder): InstrumentIdentificationDTO =
         decoder.decodeStructure(descriptor) {
         var instrumentType = ""
         var instrumentManufacturer = ""
@@ -37,7 +39,7 @@ object InstrumentIdentificationSerializer : KSerializer<InstrumentIdentification
                 else -> error("Unexpected index: $index")
             }
         }
-            InstrumentIdentification(instrumentManufacturer,instrumentSerialNumber, instrumentType)
+            InstrumentIdentificationDTO(instrumentManufacturer,instrumentSerialNumber, instrumentType)
     }
 }
 
