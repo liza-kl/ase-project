@@ -36,11 +36,13 @@ fun Route.getMemberById() {
         val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val findMemberByIdUC = FindMemberById(memberRepository = memberRepository)
         val memberResult : Member? = call.parameters["id"]?.let { it1 -> findMemberByIdUC.execute(it1.toInt()) }
-        call.respondText { "Found the member: $memberResult!" }
+        if (memberResult != null ) {
+            call.respond(toMemberDTO(memberResult))
+
+        }
     }
 
 }
-
 fun Route.addMember() {
     post("/members") {
         val receivedMemberParams = call.receive<MemberDTO>()
