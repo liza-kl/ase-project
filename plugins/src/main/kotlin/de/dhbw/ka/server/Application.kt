@@ -5,7 +5,7 @@ import de.dhbw.ka.controllers.registerInstrumentController
 import de.dhbw.ka.controllers.registerLentInstrumentController
 import de.dhbw.ka.controllers.registerMemberController
 import de.dhbw.ka.controllers.registerMusicGroupController
-import de.dhbw.ka.storage.DatabaseFactory
+import de.dhbw.ka.storage.h2.DatabaseFactory
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.serialization.*

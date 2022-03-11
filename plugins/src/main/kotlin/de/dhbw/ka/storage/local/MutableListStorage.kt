@@ -1,6 +1,7 @@
-package de.dhbw.ka.storage
+package de.dhbw.ka.storage.local
 
 import de.dhbw.ka.dto.MemberDTO
+import de.dhbw.ka.storage.MemberStorage
 
 val memberStorage = mutableListOf<MemberDTO>(
     MemberDTO(1, "Celine", "Müller", "PASSIVE"),

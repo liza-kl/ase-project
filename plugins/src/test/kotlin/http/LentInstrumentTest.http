@@ -1,5 +1,5 @@
 ###
-POST http://127.0.0.1:9000/lenting
+POST http://127.0.0.1:9000/rental
 Content-Type: application/json
 
 {
@@ -10,3 +10,6 @@ Content-Type: application/json
     "instrumentType": "Oboe"
   }
 }
+###
+GET http://127.0.0.1:9000/rental
+Content-Type: application/json

@@ -9,7 +9,7 @@ import de.dhbw.ka.members.CreateNewMember
 import de.dhbw.ka.members.FindMemberById
 import de.dhbw.ka.members.GetAllMembers
 import de.dhbw.ka.repository.MembersRepositoryImpl
-import de.dhbw.ka.storage.H2MemberStorage
+import de.dhbw.ka.storage.h2.H2MemberStorage
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -49,7 +49,7 @@ fun Route.addMember() {
         val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val createNewMemberUC = CreateNewMember(memberRepository = memberRepository)
         createNewMemberUC.execute(toMember(receivedMemberParams))
-        call.respondText("Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName}! ", status = HttpStatusCode.Created)
+        call.respondText("Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ", status = HttpStatusCode.Created)
     }
 }
 

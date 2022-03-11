@@ -3,18 +3,19 @@ package de.dhbw.ka.controllers
 import de.dhbw.ka.domain.entities.Instrument
 import de.dhbw.ka.domain.repository.InstrumentRepository
 import de.dhbw.ka.dto.InstrumentDTO
+import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrument
 import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrumentDTO
 import de.dhbw.ka.instruments.CreateInstrument
 import de.dhbw.ka.instruments.GetAllInstruments
 import de.dhbw.ka.repository.InstrumentRepositoryImpl
-import de.dhbw.ka.storage.H2InstrumentStorage
+import de.dhbw.ka.storage.h2.H2InstrumentStorage
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-fun Route.getInstrumentsRoute() {
+fun Route.getInstruments() {
     get("/instruments") {
         val instrumentRepository: InstrumentRepository =
             InstrumentRepositoryImpl(instrumentStorage = H2InstrumentStorage())
@@ -35,9 +36,9 @@ fun Route.addInstrument() {
         val instrumentRepository: InstrumentRepository =
             InstrumentRepositoryImpl(instrumentStorage = H2InstrumentStorage())
         val createNewInstrumentUC = CreateInstrument(instrumentRepository = instrumentRepository)
-        createNewInstrumentUC.execute(InstrumentDTO.toInstrument(receivedInstrumentParams))
+        createNewInstrumentUC.execute(toInstrument(receivedInstrumentParams))
         call.respondText(
-            "Successfully created the instrumentIdentification ${receivedInstrumentParams.instrumentType}! ",
+            "Successfully created the instrument with the id ${receivedInstrumentParams}! ",
             status = HttpStatusCode.Created
         )
     }
@@ -45,7 +46,7 @@ fun Route.addInstrument() {
 
 fun Application.registerInstrumentController() {
     routing {
-        getInstrumentsRoute()
+        getInstruments()
         addInstrument()
     }
 }

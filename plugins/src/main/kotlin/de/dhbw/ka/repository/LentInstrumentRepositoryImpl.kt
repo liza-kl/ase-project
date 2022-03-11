@@ -5,20 +5,22 @@ import de.dhbw.ka.domain.repository.LentInstrumentRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.LentInstrumentDTO
+import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.toLentInstrument
 import de.dhbw.ka.storage.LentInstrumentStorage
 
 class LentInstrumentRepositoryImpl(private val lentInstrumentStorage: LentInstrumentStorage) :
     LentInstrumentRepository {
     override fun borrowInstrument(memberId: Int, instrumentToBeLent: InstrumentIdentification): Boolean {
-        return lentInstrumentStorage.createLentingEntry(
-            lentingEntryData = LentInstrumentDTO(
-                memberId = memberId,
-                instrumentIdentification = InstrumentIdentificationDTO(
-                    instrumentToBeLent.instrumentType,
-                    instrumentToBeLent.instrumentSerialNumber,
-                    instrumentToBeLent.instrumentManufacturer
-                )
+        val lentInstrumentDTO = LentInstrumentDTO(
+            memberId = memberId,
+            instrumentIdentification = InstrumentIdentificationDTO(
+                instrumentToBeLent.instrumentType,
+                instrumentToBeLent.instrumentSerialNumber,
+                instrumentToBeLent.instrumentManufacturer
             )
+        )
+        return lentInstrumentStorage.createRentalEntry(
+            lentInstrumentDTO
         )
     }
 
@@ -26,5 +28,12 @@ class LentInstrumentRepositoryImpl(private val lentInstrumentStorage: LentInstru
         return lentInstrumentStorage.getLentInstrumentsByMember(
 
         )
+    }
+
+    override fun getAllLentInstruments(): List<LentInstrument> {
+        val result = lentInstrumentStorage.getAllLentInstruments()
+        return result.map {
+            toLentInstrument(it)
+        }
     }
 }

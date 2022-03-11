@@ -1,4 +1,4 @@
-package de.dhbw.ka.storage
+package de.dhbw.ka.storage.h2
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -18,20 +18,20 @@ object DatabaseFactory {
 
         transaction {
             addLogger(StdOutSqlLogger)
-            create(MemberTable)
             create(InstrumentTable)
+            create(MemberTable)
             create(LentInstrumentsTable)
             sampleMembers()
             sampleMusicInstruments()
-            sampleInstrumentLentings()
+            sampleInstrumentRentals()
         }
     }
 
     private fun sampleMembers() {
         transaction {
             MemberTable.insert {
-                it[this.firstName] = "Vika"
-                it[this.lastName] = "Akiv"
+                it[this.firstName] = "Marie"
+                it[this.lastName] = "Maier"
                 it[this.memberStatus] = "ACTIVE"
             }
             MemberTable.insert {
@@ -54,7 +54,7 @@ object DatabaseFactory {
         }
     }
 
-    private fun sampleInstrumentLentings() {
+    private fun sampleInstrumentRentals() {
         transaction {
             LentInstrumentsTable.insert {
                 it[this.memberId] = 1
