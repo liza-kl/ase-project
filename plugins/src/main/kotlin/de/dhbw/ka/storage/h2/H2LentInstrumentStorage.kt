@@ -22,7 +22,7 @@ class H2LentInstrumentStorage : LentInstrumentStorage {
         return true
     }
 
-    override fun getAllLentInstruments(): List<LentInstrumentDTO> {
+    override fun getAllInstrumentRentalEntries(): List<LentInstrumentDTO> {
         val rentedInstrumentsList: MutableList<LentInstrumentDTO> = mutableListOf()
         transaction {
             LentInstrumentsTable.selectAll().map {
@@ -33,7 +33,7 @@ class H2LentInstrumentStorage : LentInstrumentStorage {
         return rentedInstrumentsList
     }
 
-    override fun getLentInstrumentsByMember(): LentInstrument {
+    override fun getInstrumentsRentedByMember(): LentInstrument {
         TODO("Not yet implemented")
     }
 }

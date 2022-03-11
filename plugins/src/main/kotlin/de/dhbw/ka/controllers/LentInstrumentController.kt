@@ -4,9 +4,8 @@ import de.dhbw.ka.domain.repository.LentInstrumentRepository
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.LentInstrumentDTO
-import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.toLentInstrumentDTO
 import de.dhbw.ka.lentinstruments.BorrowInstrument
-import de.dhbw.ka.lentinstruments.GetAllLentInstruments
+import de.dhbw.ka.lentinstruments.GetAllInstrumentRentals
 import de.dhbw.ka.repository.LentInstrumentRepositoryImpl
 import de.dhbw.ka.repository.MembersRepositoryImpl
 import de.dhbw.ka.storage.h2.H2LentInstrumentStorage
@@ -42,10 +41,10 @@ fun Route.getAllRentedInstruments() {
     get("/rental") {
         val lentInstrumentRepository: LentInstrumentRepository =
             LentInstrumentRepositoryImpl(lentInstrumentStorage = H2LentInstrumentStorage())
-        val getAllLentInstrumentsUC = GetAllLentInstruments(lentInstrumentRepository = lentInstrumentRepository)
+        val getAllInstrumentRentalsUC = GetAllInstrumentRentals(lentInstrumentRepository = lentInstrumentRepository)
        // val lentInstrumentsList = getAllLentInstrumentsUC.execute() // TODO hier problematischer Punkt wo Id überschrieben wird
 
-        val testResult = H2LentInstrumentStorage().getAllLentInstruments()
+        val testResult = H2LentInstrumentStorage().getAllInstrumentRentalEntries()
         val lentInstrumentsResultList = mutableListOf<LentInstrumentDTO>()
         testResult.map {
             lentInstrumentsResultList.add(it)

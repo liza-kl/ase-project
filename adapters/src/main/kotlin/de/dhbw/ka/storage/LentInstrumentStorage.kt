@@ -5,6 +5,6 @@ import de.dhbw.ka.dto.LentInstrumentDTO
 
 interface LentInstrumentStorage {
     fun createRentalEntry(lentingEntryData: LentInstrumentDTO) : Boolean
-    fun getAllLentInstruments() : List<LentInstrumentDTO>
-    fun getLentInstrumentsByMember() : LentInstrument
+    fun getAllInstrumentRentalEntries() : List<LentInstrumentDTO>
+    fun getInstrumentsRentedByMember() : LentInstrument
 }

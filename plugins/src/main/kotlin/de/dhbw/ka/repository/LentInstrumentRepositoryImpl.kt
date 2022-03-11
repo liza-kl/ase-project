@@ -6,7 +6,6 @@ import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.LentInstrumentDTO
 import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.toLentInstrument
-import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.toLentInstrumentDTO
 import de.dhbw.ka.storage.LentInstrumentStorage
 
 class LentInstrumentRepositoryImpl(private val lentInstrumentStorage: LentInstrumentStorage) :
@@ -26,12 +25,12 @@ class LentInstrumentRepositoryImpl(private val lentInstrumentStorage: LentInstru
     }
 
     override fun getLentInstrumentByMember(memberId: Int): LentInstrument {
-        return lentInstrumentStorage.getLentInstrumentsByMember(
+        return lentInstrumentStorage.getInstrumentsRentedByMember(
         )
     }
 
     override fun getAllLentInstruments(): List<LentInstrument> {
-        val result = lentInstrumentStorage.getAllLentInstruments() // TODO Hier sind Ids noch richtig
+        val result = lentInstrumentStorage.getAllInstrumentRentalEntries() // TODO Hier sind Ids noch richtig
         return result.map {
             toLentInstrument(it)
         }
