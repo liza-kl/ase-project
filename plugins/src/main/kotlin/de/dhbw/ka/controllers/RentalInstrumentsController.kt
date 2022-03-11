@@ -53,7 +53,7 @@ fun Route.getAllRentedInstruments() {
     }
 }
 
-fun Application.registerLentInstrumentController() {
+fun Application.registerRentalInstrumentsController() {
     routing {
         getAllRentedInstruments()
         borrowInstrument()
