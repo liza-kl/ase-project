@@ -4,6 +4,7 @@ import de.dhbw.ka.domain.repository.LentInstrumentRepository
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.LentInstrumentDTO
+import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.toLentInstrumentDTO
 import de.dhbw.ka.lentinstruments.BorrowInstrument
 import de.dhbw.ka.lentinstruments.GetAllLentInstruments
 import de.dhbw.ka.repository.LentInstrumentRepositoryImpl
@@ -42,16 +43,15 @@ fun Route.getAllRentedInstruments() {
         val lentInstrumentRepository: LentInstrumentRepository =
             LentInstrumentRepositoryImpl(lentInstrumentStorage = H2LentInstrumentStorage())
         val getAllLentInstrumentsUC = GetAllLentInstruments(lentInstrumentRepository = lentInstrumentRepository)
-        val lentInstrumentsList = getAllLentInstrumentsUC.execute()
+       // val lentInstrumentsList = getAllLentInstrumentsUC.execute() // TODO hier problematischer Punkt wo Id überschrieben wird
+
+        val testResult = H2LentInstrumentStorage().getAllLentInstruments()
         val lentInstrumentsResultList = mutableListOf<LentInstrumentDTO>()
-        lentInstrumentsList.map {
-            val lentInstrumentDTO: LentInstrumentDTO = LentInstrumentDTO.toLentInstrumentDTO(it)
-            lentInstrumentsResultList.add(lentInstrumentDTO)
+        testResult.map {
+            lentInstrumentsResultList.add(it)
         }
         call.respond(lentInstrumentsResultList)
     }
-
-
 }
 
 fun Application.registerLentInstrumentController() {

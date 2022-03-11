@@ -5,12 +5,14 @@ import com.zaxxer.hikari.HikariDataSource
 import de.dhbw.ka.datatables.InstrumentTable
 import de.dhbw.ka.datatables.LentInstrumentsTable
 import de.dhbw.ka.datatables.MemberTable
-import org.jetbrains.exposed.sql.Database
+import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.resultRowToInstrumentDTO
+import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrumentDTO
+import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.resultRowToLentInstrumentDTO
+import de.dhbw.ka.dto.MemberDTO.MemberMapper.resultRowToMemberDTO
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.create
-import org.jetbrains.exposed.sql.StdOutSqlLogger
-import org.jetbrains.exposed.sql.addLogger
-import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.lang.reflect.Member
 
 object DatabaseFactory {
     fun init() {
@@ -30,28 +32,29 @@ object DatabaseFactory {
     private fun sampleMembers() {
         transaction {
             MemberTable.insert {
-                it[this.firstName] = "Marie"
-                it[this.lastName] = "Maier"
-                it[this.memberStatus] = "ACTIVE"
-            }
+                it[firstName] = "Marie"
+                it[lastName] = "Maier"
+                it[memberStatus] = "ACTIVE"
+            } get MemberTable.id
             MemberTable.insert {
-                it[this.firstName] = "Sophie"
-                it[this.lastName] = "Müller"
-                it[this.memberStatus] = "PASSIVE"
+                it[firstName] = "Sophie"
+                it[lastName] = "Müller"
+                it[memberStatus] = "PASSIVE"
             }
-
+            println("Sample Members: ${MemberTable.selectAll().map{ resultRowToMemberDTO(it) }}")
         }
     }
 
     private fun sampleMusicInstruments() {
         transaction {
             InstrumentTable.insert {
-                it[this.instrumentType] = "French Horn"
-                it[this.instrumentSerialNumber] = "YHR-567D"
-                it[this.instrumentManufacturer] = "Yamaha"
-                it[this.instrumentCategory] = "BRASS"
-            }
+                it[instrumentType] = "French Horn"
+                it[instrumentSerialNumber] = "YHR-567D"
+                it[instrumentManufacturer] = "Yamaha"
+                it[instrumentCategory] = "BRASS"
+            } get InstrumentTable.storageId
         }
+        println("Sample Instruments: ${InstrumentTable.selectAll().map{ resultRowToInstrumentDTO(it) }}")
     }
 
     private fun sampleInstrumentRentals() {
@@ -62,6 +65,8 @@ object DatabaseFactory {
                 it[this.instrumentSerialNumber] = "YHR-567D"
                 it[this.instrumentManufacturer] = "Yamaha"
             }
+            println("Sample Rentals: ${LentInstrumentsTable.selectAll().map{ resultRowToLentInstrumentDTO(it) }}")
+
         }
     }
     private fun hikari(): HikariDataSource {
