@@ -3,16 +3,14 @@ package de.dhbw.ka.storage.h2
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import de.dhbw.ka.datatables.InstrumentTable
-import de.dhbw.ka.datatables.LentInstrumentsTable
+import de.dhbw.ka.datatables.RentalEntriesTable
 import de.dhbw.ka.datatables.MemberTable
 import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.resultRowToInstrumentDTO
-import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrumentDTO
-import de.dhbw.ka.dto.LentInstrumentDTO.LentInstrumentMapper.resultRowToLentInstrumentDTO
+import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.resultRowToMemberDTO
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.transactions.transaction
-import java.lang.reflect.Member
 
 object DatabaseFactory {
     fun init() {
@@ -22,7 +20,7 @@ object DatabaseFactory {
             addLogger(StdOutSqlLogger)
             create(InstrumentTable)
             create(MemberTable)
-            create(LentInstrumentsTable)
+            create(RentalEntriesTable)
             sampleMembers()
             sampleMusicInstruments()
             sampleInstrumentRentals()
@@ -52,20 +50,20 @@ object DatabaseFactory {
                 it[instrumentSerialNumber] = "YHR-567D"
                 it[instrumentManufacturer] = "Yamaha"
                 it[instrumentCategory] = "BRASS"
-            } get InstrumentTable.storageId
+            }
         }
         println("Sample Instruments: ${InstrumentTable.selectAll().map{ resultRowToInstrumentDTO(it) }}")
     }
 
     private fun sampleInstrumentRentals() {
         transaction {
-            LentInstrumentsTable.insert {
+            RentalEntriesTable.insert {
                 it[this.memberId] = 1
                 it[this.instrumentType] = "French Horn"
                 it[this.instrumentSerialNumber] = "YHR-567D"
                 it[this.instrumentManufacturer] = "Yamaha"
             }
-            println("Sample Rentals: ${LentInstrumentsTable.selectAll().map{ resultRowToLentInstrumentDTO(it) }}")
+            println("Sample Rentals: ${RentalEntriesTable.selectAll().map{ resultRowToRentalInstrumentDTO(it) }}")
 
         }
     }

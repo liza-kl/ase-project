@@ -23,8 +23,7 @@ fun Route.getInstruments() {
         val instruments: List<Instrument> = getAllInstrumentsUC.execute()
         val instrumentsResultList = mutableListOf<InstrumentDTO>()
         for (instrument in instruments) {
-            val instrumentDTO = toInstrumentDTO(instrument)
-            instrumentsResultList.add(instrumentDTO)
+            instrumentsResultList.add(toInstrumentDTO(instrument))
         }
         call.respond(instrumentsResultList)
     }

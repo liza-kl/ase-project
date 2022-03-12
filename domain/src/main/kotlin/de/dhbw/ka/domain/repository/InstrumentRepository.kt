@@ -7,4 +7,5 @@ interface InstrumentRepository {
     fun createInstrument(instrumentData: Instrument) : Boolean
     fun deleteInstrument(instrumentId: InstrumentIdentification) : Boolean
     fun getAllInstruments() : List<Instrument>
+    fun checkIfInstrumentExists(instrumentIdentification: InstrumentIdentification) : Boolean
 }

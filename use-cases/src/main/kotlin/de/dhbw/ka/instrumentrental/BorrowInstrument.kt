@@ -1,12 +1,12 @@
-package de.dhbw.ka.lentinstruments
+package de.dhbw.ka.instrumentrental
 
-import de.dhbw.ka.domain.repository.LentInstrumentRepository
+import de.dhbw.ka.domain.repository.InstrumentRentalRepository
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.domain.valueobjects.MemberStatus
 
 class BorrowInstrument(
-    private val lentInstrumentRepository: LentInstrumentRepository,
+    private val instrumentRentalRepository: InstrumentRentalRepository,
     private val memberRepository: MemberRepository
 ) {
     fun execute(memberId: Int, instrumentData: InstrumentIdentification): Boolean {
@@ -17,6 +17,6 @@ class BorrowInstrument(
         ) {
             throw IllegalArgumentException("Member must be ACTIVE to be able to borrow an Instrument")
         }
-        return lentInstrumentRepository.borrowInstrument(memberId, instrumentData)
+        return instrumentRentalRepository.borrowInstrument(memberId, instrumentData)
     }
 }

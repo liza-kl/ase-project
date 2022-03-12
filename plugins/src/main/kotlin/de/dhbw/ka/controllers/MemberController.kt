@@ -35,21 +35,25 @@ fun Route.getMemberById() {
     get("members/{id}") {
         val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val findMemberByIdUC = FindMemberById(memberRepository = memberRepository)
-        val memberResult : Member? = call.parameters["id"]?.let { it1 -> findMemberByIdUC.execute(it1.toInt()) }
-        if (memberResult != null ) {
+        val memberResult: Member? = call.parameters["id"]?.let { it1 -> findMemberByIdUC.execute(it1.toInt()) }
+        if (memberResult != null) {
             call.respond(toMemberDTO(memberResult))
 
         }
     }
 
 }
+
 fun Route.addMember() {
     post("/members") {
         val receivedMemberParams = call.receive<MemberDTO>()
         val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val createNewMemberUC = CreateNewMember(memberRepository = memberRepository)
         createNewMemberUC.execute(toMember(receivedMemberParams))
-        call.respondText("Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ", status = HttpStatusCode.Created)
+        call.respondText(
+            "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
+            status = HttpStatusCode.Created
+        )
     }
 }
 

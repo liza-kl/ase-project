@@ -1,14 +1,14 @@
 package de.dhbw.ka.controllers
 
-import de.dhbw.ka.domain.repository.LentInstrumentRepository
+import de.dhbw.ka.domain.repository.InstrumentRentalRepository
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
-import de.dhbw.ka.dto.LentInstrumentDTO
-import de.dhbw.ka.lentinstruments.BorrowInstrument
-import de.dhbw.ka.lentinstruments.GetAllInstrumentRentals
-import de.dhbw.ka.repository.LentInstrumentRepositoryImpl
+import de.dhbw.ka.dto.RentalInstrumentDTO
+import de.dhbw.ka.instrumentrental.BorrowInstrument
+import de.dhbw.ka.instrumentrental.GetAllInstrumentRentals
+import de.dhbw.ka.repository.InstrumentRentalRepositoryImpl
 import de.dhbw.ka.repository.MembersRepositoryImpl
-import de.dhbw.ka.storage.h2.H2LentInstrumentStorage
+import de.dhbw.ka.storage.h2.H2InstrumentRentalStorage
 import de.dhbw.ka.storage.h2.H2MemberStorage
 import io.ktor.application.*
 import io.ktor.http.*
@@ -18,12 +18,12 @@ import io.ktor.routing.*
 
 fun Route.borrowInstrument() {
     post("/rental") {
-        val receivedParams = call.receive<LentInstrumentDTO>()
-        val lentInstrumentRepository: LentInstrumentRepository =
-            LentInstrumentRepositoryImpl(lentInstrumentStorage = H2LentInstrumentStorage())
+        val receivedParams = call.receive<RentalInstrumentDTO>()
+        val instrumentRentalRepository: InstrumentRentalRepository =
+            InstrumentRentalRepositoryImpl(instrumentRentalStorage = H2InstrumentRentalStorage())
         val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val borrowInstrumentUC =
-            BorrowInstrument(lentInstrumentRepository = lentInstrumentRepository, memberRepository = memberRepository)
+            BorrowInstrument(instrumentRentalRepository = instrumentRentalRepository, memberRepository = memberRepository)
         borrowInstrumentUC.execute(
             receivedParams.memberId,
             InstrumentIdentification(
@@ -39,15 +39,13 @@ fun Route.borrowInstrument() {
 fun Route.getAllRentedInstruments() {
 
     get("/rental") {
-        val lentInstrumentRepository: LentInstrumentRepository =
-            LentInstrumentRepositoryImpl(lentInstrumentStorage = H2LentInstrumentStorage())
-        val getAllInstrumentRentalsUC = GetAllInstrumentRentals(lentInstrumentRepository = lentInstrumentRepository)
-       // val lentInstrumentsList = getAllLentInstrumentsUC.execute() // TODO hier problematischer Punkt wo Id überschrieben wird
-
-        val testResult = H2LentInstrumentStorage().getAllInstrumentRentalEntries()
-        val lentInstrumentsResultList = mutableListOf<LentInstrumentDTO>()
-        testResult.map {
-            lentInstrumentsResultList.add(it)
+        val instrumentRentalRepository: InstrumentRentalRepository =
+            InstrumentRentalRepositoryImpl(instrumentRentalStorage = H2InstrumentRentalStorage())
+        val getAllInstrumentRentalsUC = GetAllInstrumentRentals(instrumentRentalRepository = instrumentRentalRepository)
+        val lentInstrumentsList = getAllInstrumentRentalsUC.execute()
+        val lentInstrumentsResultList = mutableListOf<RentalInstrumentDTO>()
+        lentInstrumentsList.map {
+            lentInstrumentsResultList.add(RentalInstrumentDTO.toRentalInstrumentDTO(it))
         }
         call.respond(lentInstrumentsResultList)
     }
