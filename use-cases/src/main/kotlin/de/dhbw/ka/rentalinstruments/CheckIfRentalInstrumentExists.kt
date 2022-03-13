@@ -5,9 +5,6 @@ import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 
 class CheckIfRentalInstrumentExists(private val rentalInstrumentRepository: RentalInstrumentRepository) {
     fun execute(rentalInstrumentToCheck: InstrumentIdentification) : Boolean {
-        if (rentalInstrumentRepository.checkIfRentalInstrumentExists(rentalInstrumentToCheck)) {
-            return true
-        }
-        return false
+        return rentalInstrumentRepository.checkIfRentalInstrumentExists(rentalInstrumentToCheck)
     }
 }
