@@ -1,5 +1,6 @@
 package de.dhbw.ka.controllers
 
+import de.dhbw.ka.controllers.MemberControllerProperties.memberRepository
 import de.dhbw.ka.domain.entities.Member
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.dto.MemberDTO
@@ -16,9 +17,12 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
+internal object MemberControllerProperties {
+    val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
+}
+
 fun Route.getMembers() {
     get("/members") {
-        val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val getAllMembersUC = GetAllMembers(memberRepository = memberRepository)
         val members: List<Member> = getAllMembersUC.execute()
         val someList = mutableListOf<MemberDTO>()
@@ -33,12 +37,10 @@ fun Route.getMembers() {
 
 fun Route.getMemberById() {
     get("members/{id}") {
-        val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val findMemberByIdUC = FindMemberById(memberRepository = memberRepository)
         val memberResult: Member? = call.parameters["id"]?.let { it1 -> findMemberByIdUC.execute(it1.toInt()) }
         if (memberResult != null) {
             call.respond(toMemberDTO(memberResult))
-
         }
     }
 
@@ -47,7 +49,6 @@ fun Route.getMemberById() {
 fun Route.addMember() {
     post("/members") {
         val receivedMemberParams = call.receive<MemberDTO>()
-        val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
         val createNewMemberUC = CreateNewMember(memberRepository = memberRepository)
         createNewMemberUC.execute(toMember(receivedMemberParams))
         call.respondText(

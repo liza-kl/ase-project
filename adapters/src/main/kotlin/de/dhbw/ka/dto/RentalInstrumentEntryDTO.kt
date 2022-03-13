@@ -3,8 +3,8 @@ package de.dhbw.ka.dto
 import de.dhbw.ka.datatables.RentalEntriesTable
 import de.dhbw.ka.domain.aggregates.InstrumentRentalEntry
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.ResultRow
-import kotlinx.serialization.*
 
 @Serializable
 data class RentalInstrumentEntryDTO(
@@ -26,25 +26,27 @@ data class RentalInstrumentEntryDTO(
         fun toRentalInstrumentEntryDTO(
             instrumentRentalEntryData: InstrumentRentalEntry
         ): RentalInstrumentEntryDTO {
+            val instrumentId = instrumentRentalEntryData.instrumentIdentification
             return RentalInstrumentEntryDTO(
                 rentalId = instrumentRentalEntryData.rentalEntryId,
                 memberId = instrumentRentalEntryData.memberId,
                 instrumentIdentification = InstrumentIdentificationDTO(
-                    instrumentRentalEntryData.instrumentIdentification.instrumentManufacturer,
-                    instrumentRentalEntryData.instrumentIdentification.instrumentSerialNumber,
-                    instrumentRentalEntryData.instrumentIdentification.instrumentType
+                    instrumentId.instrumentManufacturer,
+                    instrumentId.instrumentSerialNumber,
+                    instrumentId.instrumentType
                 )
             )
         }
 
         fun toRentalInstrumentEntry(rentalInstrumentEntryDTOData: RentalInstrumentEntryDTO): InstrumentRentalEntry {
+            val instrumentId = rentalInstrumentEntryDTOData.instrumentIdentification
             return InstrumentRentalEntry(
                 rentalEntryId = rentalInstrumentEntryDTOData.rentalId,
                 memberId = rentalInstrumentEntryDTOData.memberId,
                 instrumentIdentification = InstrumentIdentification(
-                    rentalInstrumentEntryDTOData.instrumentIdentification.instrumentManufacturer,
-                    rentalInstrumentEntryDTOData.instrumentIdentification.instrumentSerialNumber,
-                    rentalInstrumentEntryDTOData.instrumentIdentification.instrumentType
+                    instrumentId.instrumentManufacturer,
+                    instrumentId.instrumentSerialNumber,
+                    instrumentId.instrumentType
                 )
             )
         }

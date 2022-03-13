@@ -15,16 +15,16 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
+internal object InstrumentProperties {
+    val instrumentRepository: InstrumentRepository = InstrumentRepositoryImpl(instrumentStorage = H2InstrumentStorage())
+}
+
 fun Route.getInstruments() {
     get("/instruments") {
-        val instrumentRepository: InstrumentRepository =
-            InstrumentRepositoryImpl(instrumentStorage = H2InstrumentStorage())
-        val getAllInstrumentsUC = GetAllInstruments(instrumentRepository = instrumentRepository)
+        val getAllInstrumentsUC = GetAllInstruments(instrumentRepository = InstrumentProperties.instrumentRepository)
         val instruments: List<Instrument> = getAllInstrumentsUC.execute()
         val instrumentsResultList = mutableListOf<InstrumentDTO>()
-        for (instrument in instruments) {
-            instrumentsResultList.add(toInstrumentDTO(instrument))
-        }
+        instruments.map { instrumentsResultList.add(toInstrumentDTO(it)) }
         call.respond(instrumentsResultList)
     }
 }
@@ -32,9 +32,7 @@ fun Route.getInstruments() {
 fun Route.addInstrument() {
     post("/instruments") {
         val receivedInstrumentParams = call.receive<InstrumentDTO>()
-        val instrumentRepository: InstrumentRepository =
-            InstrumentRepositoryImpl(instrumentStorage = H2InstrumentStorage())
-        val createNewInstrumentUC = CreateInstrument(instrumentRepository = instrumentRepository)
+        val createNewInstrumentUC = CreateInstrument(instrumentRepository = InstrumentProperties.instrumentRepository)
         createNewInstrumentUC.execute(toInstrument(receivedInstrumentParams))
         call.respondText(
             "Successfully created the instrument with the id ${receivedInstrumentParams}! ",

@@ -23,22 +23,24 @@ data class RentalInstrumentDTO(
         }
 
         fun toRentalInstrumentDTO(rentalInstrument: RentalInstrument): RentalInstrumentDTO {
+            val instrumentId = rentalInstrument.instrumentIdentification
             return RentalInstrumentDTO(
                 instrumentIdentification = InstrumentIdentificationDTO(
-                    instrumentManufacturer = rentalInstrument.instrumentIdentification.instrumentManufacturer,
-                    instrumentSerialNumber = rentalInstrument.instrumentIdentification.instrumentSerialNumber,
-                    instrumentType = rentalInstrument.instrumentIdentification.instrumentType,
+                    instrumentManufacturer = instrumentId.instrumentManufacturer,
+                    instrumentSerialNumber = instrumentId.instrumentSerialNumber,
+                    instrumentType = instrumentId.instrumentType,
                 ),
                 quantity = rentalInstrument.quantity
             )
         }
 
         fun toRentalInstrument(rentalInstrumentDTO: RentalInstrumentDTO): RentalInstrument {
+            val rentalInstrumentId = rentalInstrumentDTO.instrumentIdentification
             return RentalInstrument(
                 instrumentIdentification = InstrumentIdentification(
-                    instrumentManufacturer = rentalInstrumentDTO.instrumentIdentification.instrumentManufacturer,
-                    instrumentSerialNumber = rentalInstrumentDTO.instrumentIdentification.instrumentSerialNumber,
-                    instrumentType = rentalInstrumentDTO.instrumentIdentification.instrumentType,
+                    instrumentManufacturer = rentalInstrumentId.instrumentManufacturer,
+                    instrumentSerialNumber = rentalInstrumentId.instrumentSerialNumber,
+                    instrumentType = rentalInstrumentId.instrumentType,
                 ),
                 quantity = rentalInstrumentDTO.quantity
             )
