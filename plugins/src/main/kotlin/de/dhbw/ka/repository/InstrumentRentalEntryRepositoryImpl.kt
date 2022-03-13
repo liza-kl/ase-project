@@ -25,7 +25,7 @@ class InstrumentRentalEntryRepositoryImpl(private val instrumentRentalEntryStora
     }
 
     override fun getAllRentalEntries(): List<InstrumentRentalEntry> {
-        val result = instrumentRentalEntryStorage.getAllInstrumentRentalEntries() // TODO Hier sind Ids noch richtig
+        val result = instrumentRentalEntryStorage.getAllInstrumentRentalEntries()
         return result.map {
             toRentalInstrumentEntry(it)
         }

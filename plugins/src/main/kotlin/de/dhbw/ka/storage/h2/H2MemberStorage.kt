@@ -25,7 +25,7 @@ class H2MemberStorage : MemberStorage {
 
     override fun findById(memberId: Int): MemberDTO? {
         val result = transaction {
-            MemberTable.select(MemberTable.id eq memberId).single() //TODO is single() the correct method?
+            MemberTable.select(MemberTable.id eq memberId).single()
         }
        return resultRowToMemberDTO(result)
     }
