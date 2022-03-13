@@ -10,13 +10,13 @@ import de.dhbw.ka.storage.InstrumentRentalEntryStorage
 
 class InstrumentRentalEntryRepositoryImpl(private val instrumentRentalEntryStorage: InstrumentRentalEntryStorage) :
     InstrumentRentalEntryRepository {
-    override fun borrowInstrument(memberId: Int, instrumentToBeLent: InstrumentIdentification): Boolean {
+    override fun rentInstrument(memberId: Int, instrumentIdentification: InstrumentIdentification): Boolean {
         val rentalInstrumentEntryDTO = RentalInstrumentEntryDTO(
             memberId = memberId,
             instrumentIdentification = InstrumentIdentificationDTO(
-                instrumentToBeLent.instrumentManufacturer,
-                instrumentToBeLent.instrumentSerialNumber,
-                instrumentToBeLent.instrumentType,
+                instrumentIdentification.instrumentManufacturer,
+                instrumentIdentification.instrumentSerialNumber,
+                instrumentIdentification.instrumentType,
             )
         )
         return instrumentRentalEntryStorage.createRentalEntry(

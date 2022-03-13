@@ -33,6 +33,6 @@ class RentInstrument(
             throw IllegalArgumentException("There is no rental instrument available at the moment!")
         }
         rentalInstrumentRepository.decreaseQuantity(instrumentData)
-        return instrumentRentalEntryRepository.borrowInstrument(memberId, instrumentData)
+        return instrumentRentalEntryRepository.rentInstrument(memberId,instrumentData)
     }
 }

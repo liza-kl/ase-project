@@ -5,6 +5,6 @@ import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 
 
 interface InstrumentRentalEntryRepository {
-    fun borrowInstrument(memberId: Int, instrumentToBeLent : InstrumentIdentification) : Boolean
+    fun rentInstrument(memberId: Int, instrumentIdentification: InstrumentIdentification) : Boolean
     fun getAllRentalEntries() : List<InstrumentRentalEntry>
 }
