@@ -14,9 +14,9 @@ data class RentalInstrumentDTO(
         fun resultRowToRentalInstrumentDTO(resultRow: ResultRow): RentalInstrumentDTO {
             return RentalInstrumentDTO(
                 instrumentIdentification = InstrumentIdentificationDTO(
-                    instrumentType = resultRow[RentalInstrumentsTable.instrumentType],
                     instrumentManufacturer = resultRow[RentalInstrumentsTable.instrumentManufacturer],
-                    instrumentSerialNumber = resultRow[RentalInstrumentsTable.instrumentSerialNumber]
+                    instrumentSerialNumber = resultRow[RentalInstrumentsTable.instrumentSerialNumber],
+                    instrumentType = resultRow[RentalInstrumentsTable.instrumentType],
                 ),
                 quantity = resultRow[RentalInstrumentsTable.quantity]
             )
@@ -25,9 +25,9 @@ data class RentalInstrumentDTO(
         fun toRentalInstrumentDTO(rentalInstrument: RentalInstrument): RentalInstrumentDTO {
             return RentalInstrumentDTO(
                 instrumentIdentification = InstrumentIdentificationDTO(
-                    rentalInstrument.instrumentIdentification.instrumentType,
-                    rentalInstrument.instrumentIdentification.instrumentManufacturer,
-                    rentalInstrument.instrumentIdentification.instrumentSerialNumber
+                    instrumentManufacturer = rentalInstrument.instrumentIdentification.instrumentManufacturer,
+                    instrumentSerialNumber = rentalInstrument.instrumentIdentification.instrumentSerialNumber,
+                    instrumentType = rentalInstrument.instrumentIdentification.instrumentType,
                 ),
                 quantity = rentalInstrument.quantity
             )
@@ -36,9 +36,9 @@ data class RentalInstrumentDTO(
         fun toRentalInstrument(rentalInstrumentDTO: RentalInstrumentDTO): RentalInstrument {
             return RentalInstrument(
                 instrumentIdentification = InstrumentIdentification(
-                    rentalInstrumentDTO.instrumentIdentification.instrumentType,
-                    rentalInstrumentDTO.instrumentIdentification.instrumentManufacturer,
-                    rentalInstrumentDTO.instrumentIdentification.instrumentSerialNumber,
+                    instrumentManufacturer = rentalInstrumentDTO.instrumentIdentification.instrumentManufacturer,
+                    instrumentSerialNumber = rentalInstrumentDTO.instrumentIdentification.instrumentSerialNumber,
+                    instrumentType = rentalInstrumentDTO.instrumentIdentification.instrumentType,
                 ),
                 quantity = rentalInstrumentDTO.quantity
             )

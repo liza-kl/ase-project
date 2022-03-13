@@ -13,9 +13,9 @@ class H2InstrumentStorage : InstrumentStorage {
     override fun create(instrumentData: InstrumentDTO): Boolean {
         transaction {
             InstrumentTable.insert {
-                it[instrumentType] = instrumentData.instrumentType
                 it[instrumentManufacturer] = instrumentData.instrumentManufacturer
                 it[instrumentSerialNumber] = instrumentData.instrumentSerialNumber
+                it[instrumentType] = instrumentData.instrumentType
                 it[instrumentCategory] = instrumentData.instrumentCategory
             }
 
@@ -37,7 +37,9 @@ class H2InstrumentStorage : InstrumentStorage {
     override fun checkIfInstrumentExists(instrumentIdentificationDTO: InstrumentIdentificationDTO): Boolean {
         transaction {
             InstrumentTable.select {
+                (InstrumentTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
                 (InstrumentTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+                (InstrumentTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
             }.firstOrNull()
         } ?: return false
         return true

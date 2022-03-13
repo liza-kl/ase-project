@@ -18,28 +18,28 @@ object InstrumentIdentificationAsStringSerializer : KSerializer<InstrumentIdenti
 
     override fun serialize(encoder: Encoder, value: InstrumentIdentificationDTO) {
         encoder.encodeStructure(descriptor) {
-            encodeStringElement(descriptor, 0, value.instrumentType)
-            encodeStringElement(descriptor, 1, value.instrumentManufacturer)
-            encodeStringElement(descriptor, 2, value.instrumentSerialNumber)
+            encodeStringElement(descriptor, 0, value.instrumentManufacturer)
+            encodeStringElement(descriptor, 1, value.instrumentSerialNumber)
+            encodeStringElement(descriptor, 2, value.instrumentType)
         }
     }
 
     override fun deserialize(decoder: Decoder): InstrumentIdentificationDTO =
         decoder.decodeStructure(descriptor) {
-        var instrumentType = ""
-        var instrumentManufacturer = ""
-        var instrumentSerialNumber = ""
+            var instrumentManufacturer = ""
+            var instrumentSerialNumber = ""
+            var instrumentType = ""
 
-        while (true) {
-            when (val index = decodeElementIndex(descriptor)) {
-                0 -> instrumentType = decodeStringElement(descriptor, 0)
-                1 -> instrumentManufacturer = decodeStringElement(descriptor, 1)
-                2 -> instrumentSerialNumber = decodeStringElement(descriptor, 2)
-                CompositeDecoder.DECODE_DONE -> break
-                else -> error("Unexpected index: $index")
+            while (true) {
+                when (val index = decodeElementIndex(descriptor)) {
+                    0 -> instrumentManufacturer = decodeStringElement(descriptor, 0)
+                    1 -> instrumentSerialNumber = decodeStringElement(descriptor, 1)
+                    2 -> instrumentType = decodeStringElement(descriptor, 2)
+                    CompositeDecoder.DECODE_DONE -> break
+                    else -> error("Unexpected index: $index")
+                }
             }
+            InstrumentIdentificationDTO(instrumentManufacturer, instrumentSerialNumber, instrumentType)
         }
-            InstrumentIdentificationDTO(instrumentManufacturer,instrumentSerialNumber, instrumentType)
-    }
 }
 

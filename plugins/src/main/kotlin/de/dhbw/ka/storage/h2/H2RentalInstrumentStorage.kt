@@ -9,6 +9,7 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import kotlin.math.absoluteValue
 
 class H2RentalInstrumentStorage : RentalInstrumentStorage {
     override fun getAllRentalInstruments(): List<RentalInstrumentDTO> {
@@ -25,9 +26,9 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
     override fun createRentalInstrument(rentalInstrumentData: RentalInstrumentDTO): Boolean {
         transaction {
             RentalInstrumentsTable.insert {
-                it[instrumentType] = rentalInstrumentData.instrumentIdentification.instrumentType
-                it[instrumentSerialNumber] = rentalInstrumentData.instrumentIdentification.instrumentSerialNumber
                 it[instrumentManufacturer] = rentalInstrumentData.instrumentIdentification.instrumentManufacturer
+                it[instrumentSerialNumber] = rentalInstrumentData.instrumentIdentification.instrumentSerialNumber
+                it[instrumentType] = rentalInstrumentData.instrumentIdentification.instrumentType
                 it[quantity] = rentalInstrumentData.quantity
             }
         }
@@ -37,9 +38,28 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
     override fun checkIfRentalInstrumentExists(instrumentIdentificationDTO: InstrumentIdentificationDTO): Boolean {
         transaction {
             RentalInstrumentsTable.select {
+                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
                 (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+                (RentalInstrumentsTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
             }.firstOrNull()
         } ?: return false
         return true
+    }
+
+    override fun checkAvailableQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO): Int {
+       val result = transaction {
+            RentalInstrumentsTable
+                .slice(RentalInstrumentsTable.quantity)
+                .select {
+                    (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
+                    (RentalInstrumentsTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
+                    (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+                }.firstOrNull()
+        }
+        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue // TODO Proper Casting!!!
+    }
+
+    override fun decreaseQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO) {
+        TODO("Not yet implemented")
     }
 }

@@ -11,6 +11,7 @@ import de.dhbw.ka.storage.RentalInstrumentStorage
 
 class RentalInstrumentRepositoryImpl(private val rentalInstrumentStorage: RentalInstrumentStorage) :
     RentalInstrumentRepository {
+
     override fun createRentalInstrument(rentalInstrument: RentalInstrument): Boolean {
         val rentalInstrumentDTO: RentalInstrumentDTO = toRentalInstrumentDTO(rentalInstrument)
         return rentalInstrumentStorage.createRentalInstrument(rentalInstrumentDTO)
@@ -23,11 +24,27 @@ class RentalInstrumentRepositoryImpl(private val rentalInstrumentStorage: Rental
 
     override fun checkIfRentalInstrumentExists(instrumentIdentification: InstrumentIdentification): Boolean {
         val instrumentIdentificationDTO = InstrumentIdentificationDTO(
-            instrumentIdentification.instrumentManufacturer,
-            instrumentIdentification.instrumentSerialNumber,
+            instrumentManufacturer = instrumentIdentification.instrumentManufacturer,
+            instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
             instrumentType = instrumentIdentification.instrumentType)
         return rentalInstrumentStorage.checkIfRentalInstrumentExists(instrumentIdentificationDTO)
 
+    }
+
+    override fun checkAvailableQuantity(instrumentIdentification: InstrumentIdentification): Int {
+        val instrumentIdentificationDTO = InstrumentIdentificationDTO(
+            instrumentIdentification.instrumentManufacturer,
+            instrumentIdentification.instrumentSerialNumber,
+            instrumentType = instrumentIdentification.instrumentType)
+        return rentalInstrumentStorage.checkAvailableQuantity(instrumentIdentificationDTO)
+    }
+
+    override fun decreaseQuantity(instrumentIdentification: InstrumentIdentification) {
+        val instrumentIdentificationDTO = InstrumentIdentificationDTO(
+            instrumentManufacturer = instrumentIdentification.instrumentManufacturer,
+            instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
+            instrumentType = instrumentIdentification.instrumentType)
+        return rentalInstrumentStorage.decreaseQuantity(instrumentIdentificationDTO)
     }
 
 }

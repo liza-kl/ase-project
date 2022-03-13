@@ -25,8 +25,8 @@ class InstrumentRepositoryImpl(private val instrumentStorage: InstrumentStorage)
 
     override fun checkIfInstrumentExists(instrumentIdentification: InstrumentIdentification): Boolean {
         val instrumentIdentificationDTO = InstrumentIdentificationDTO(
-            instrumentIdentification.instrumentManufacturer,
-            instrumentIdentification.instrumentSerialNumber,
+            instrumentManufacturer = instrumentIdentification.instrumentManufacturer,
+            instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
             instrumentType = instrumentIdentification.instrumentType)
         return instrumentStorage.checkIfInstrumentExists(instrumentIdentificationDTO)
     }

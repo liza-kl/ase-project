@@ -14,9 +14,9 @@ class InstrumentRentalEntryRepositoryImpl(private val instrumentRentalEntryStora
         val rentalInstrumentEntryDTO = RentalInstrumentEntryDTO(
             memberId = memberId,
             instrumentIdentification = InstrumentIdentificationDTO(
-                instrumentToBeLent.instrumentType,
+                instrumentToBeLent.instrumentManufacturer,
                 instrumentToBeLent.instrumentSerialNumber,
-                instrumentToBeLent.instrumentManufacturer
+                instrumentToBeLent.instrumentType,
             )
         )
         return instrumentRentalEntryStorage.createRentalEntry(

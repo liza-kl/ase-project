@@ -42,8 +42,8 @@ data class RentalInstrumentEntryDTO(
                 rentalEntryId = rentalInstrumentEntryDTOData.rentalId,
                 memberId = rentalInstrumentEntryDTOData.memberId,
                 instrumentIdentification = InstrumentIdentification(
-                    rentalInstrumentEntryDTOData.instrumentIdentification.instrumentSerialNumber,
                     rentalInstrumentEntryDTOData.instrumentIdentification.instrumentManufacturer,
+                    rentalInstrumentEntryDTOData.instrumentIdentification.instrumentSerialNumber,
                     rentalInstrumentEntryDTOData.instrumentIdentification.instrumentType
                 )
             )

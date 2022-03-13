@@ -10,6 +10,24 @@ Content-Type: application/json
     "instrumentType": "Oboe"
   }
 }
+
 ###
 GET http://127.0.0.1:9000/rental
 Content-Type: application/json
+
+###
+GET http://127.0.0.1:9000/rentalinstruments
+Content-Type: application/json
+
+###
+POST http://127.0.0.1:9000/rentalinstruments
+Content-Type: application/json
+
+{
+  "instrumentIdentification": {
+    "instrumentManufacturer": "Yamaha",
+    "instrumentSerialNumber": "YOB-241",
+    "instrumentType": "Oboe"
+  },
+  "quantity": 3
+}

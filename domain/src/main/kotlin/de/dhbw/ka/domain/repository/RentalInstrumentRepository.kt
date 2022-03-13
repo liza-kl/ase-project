@@ -7,4 +7,6 @@ interface RentalInstrumentRepository {
     fun createRentalInstrument(rentalInstrument: RentalInstrument) : Boolean
     fun getRentalInstruments() : List<RentalInstrument>
     fun checkIfRentalInstrumentExists(instrumentIdentification: InstrumentIdentification) : Boolean
+    fun checkAvailableQuantity(instrumentIdentification: InstrumentIdentification) : Int
+    fun decreaseQuantity(instrumentIdentification: InstrumentIdentification)
 }
