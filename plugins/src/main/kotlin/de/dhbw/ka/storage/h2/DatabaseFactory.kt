@@ -5,8 +5,9 @@ import com.zaxxer.hikari.HikariDataSource
 import de.dhbw.ka.datatables.InstrumentTable
 import de.dhbw.ka.datatables.RentalEntriesTable
 import de.dhbw.ka.datatables.MemberTable
+import de.dhbw.ka.datatables.RentalInstrumentsTable
 import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.resultRowToInstrumentDTO
-import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
+import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.resultRowToRentalInstrumentEntryDTO
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.resultRowToMemberDTO
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.create
@@ -21,9 +22,22 @@ object DatabaseFactory {
             create(InstrumentTable)
             create(MemberTable)
             create(RentalEntriesTable)
+            create(RentalInstrumentsTable)
             sampleMembers()
             sampleMusicInstruments()
             sampleInstrumentRentals()
+            sampleRentalInstruments()
+        }
+    }
+
+    private fun sampleRentalInstruments() {
+        transaction {
+            RentalInstrumentsTable.insert {
+                it[instrumentType] = "French Horn"
+                it[instrumentSerialNumber] = "YHR-567D"
+                it[instrumentManufacturer] = "Yamaha"
+                it[quantity] = 1
+            }
         }
     }
 
@@ -63,7 +77,7 @@ object DatabaseFactory {
                 it[this.instrumentSerialNumber] = "YHR-567D"
                 it[this.instrumentManufacturer] = "Yamaha"
             }
-            println("Sample Rentals: ${RentalEntriesTable.selectAll().map{ resultRowToRentalInstrumentDTO(it) }}")
+            println("Sample Rentals: ${RentalEntriesTable.selectAll().map{ resultRowToRentalInstrumentEntryDTO(it) }}")
 
         }
     }
