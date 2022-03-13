@@ -5,9 +5,7 @@ import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
 import de.dhbw.ka.storage.RentalInstrumentStorage
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.math.absoluteValue
 
@@ -47,7 +45,7 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
     }
 
     override fun checkAvailableQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO): Int {
-       val result = transaction {
+        val result = transaction {
             RentalInstrumentsTable
                 .slice(RentalInstrumentsTable.quantity)
                 .select {
@@ -60,6 +58,16 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
     }
 
     override fun decreaseQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO) {
-        TODO("Not yet implemented")
+        transaction {
+            RentalInstrumentsTable.update({
+                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
+                (RentalInstrumentsTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
+                (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+            }) {
+                with(SqlExpressionBuilder) {
+                    it.update(quantity, quantity - 1)
+                }
+            }
+        }
     }
 }

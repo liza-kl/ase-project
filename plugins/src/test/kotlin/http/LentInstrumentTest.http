@@ -29,5 +29,5 @@ Content-Type: application/json
     "instrumentSerialNumber": "YOB-241",
     "instrumentType": "Oboe"
   },
-  "quantity": 3
+  "quantity": 1
 }

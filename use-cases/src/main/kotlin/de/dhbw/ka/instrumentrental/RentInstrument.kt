@@ -32,6 +32,7 @@ class RentInstrument(
         if (checkQuantityOfRentalInstrument(instrumentData) <= 0) {
             throw IllegalArgumentException("There is no rental instrument available at the moment!")
         }
+        rentalInstrumentRepository.decreaseQuantity(instrumentData)
         return instrumentRentalEntryRepository.borrowInstrument(memberId, instrumentData)
     }
 }

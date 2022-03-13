@@ -20,6 +20,9 @@ class CreateRentalInstrument(
         if (doesRentalInstrumentExists.execute(rentalInstrument.instrumentIdentification)) {
             throw Exception("The same Rental Instrument can't be created twice")
         }
+        if (rentalInstrument.quantity <= 0) {
+            throw Exception("You need to have at least 1 rental instrument in your Rental Instrument storage!")
+        }
         return rentalInstrumentRepository.createRentalInstrument(rentalInstrument)
     }
 }
