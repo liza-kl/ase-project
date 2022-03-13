@@ -2,8 +2,9 @@ package de.dhbw.ka.server
 
 import de.dhbw.ka.configureRouting
 import de.dhbw.ka.controllers.registerInstrumentController
-import de.dhbw.ka.controllers.registerRentalInstrumentsController
 import de.dhbw.ka.controllers.registerMemberController
+import de.dhbw.ka.controllers.registerRentalInstrumentEntriesController
+import de.dhbw.ka.controllers.registerRentalInstrumentsController
 import de.dhbw.ka.storage.h2.DatabaseFactory
 import io.ktor.application.*
 import io.ktor.features.*
@@ -27,6 +28,7 @@ fun Application.module(testing: Boolean = false) {
     registerMemberController()
     registerInstrumentController()
     registerRentalInstrumentsController()
+    registerRentalInstrumentEntriesController()
 }
 
 
