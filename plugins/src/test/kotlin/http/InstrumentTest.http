@@ -1,0 +1,25 @@
+POST http://127.0.0.1:9000/instruments
+Content-Type: application/json
+
+{
+  "instrumentType": "Oboe",
+  "instrumentManufacturer": "Yamaha",
+  "instrumentSerialNumber": "YOB-241",
+  "instrumentCategory": "WOODWIND"
+}
+
+###
+GET http://127.0.0.1:9000/instruments
+Content-Type: application/json
+
+###
+POST http://127.0.0.1:9000/instruments
+Content-Type: application/json
+
+{
+  "instrumentType": "Timpani",
+  "instrumentManufacturer": "Adams",
+  "instrumentSerialNumber": "29\" 2PAUFFI29D FS German",
+  "instrumentCategory": "PERCUSSION"
+}
+

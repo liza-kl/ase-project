@@ -14,7 +14,8 @@ class MembersRepositoryImpl(private val memberStorage: MemberStorage) : MemberRe
     }
 
     override fun findById(id: Int): Member? {
-        TODO("Not yet implemented")
+        val result = memberStorage.findById(id)
+        return result?.let { toMember(it) }
     }
 
     override fun update(input: Member): Boolean {

@@ -1,13 +1,11 @@
 package de.dhbw.ka.domain.repository
 
 import de.dhbw.ka.domain.entities.Instrument
+import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 
 interface InstrumentRepository {
-
-    suspend fun getInstrumentsInventory() : Result<List<Instrument>>
-
-    suspend fun addInstrumentToInventory()
-
-    suspend fun deleteInstrumentFromInventory()
-
+    fun createInstrument(instrumentData: Instrument) : Boolean
+    fun deleteInstrument(instrumentId: InstrumentIdentification) : Boolean
+    fun getAllInstruments() : List<Instrument>
+    fun checkIfInstrumentExists(instrumentIdentification: InstrumentIdentification) : Boolean
 }

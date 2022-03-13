@@ -1,16 +1,11 @@
 package de.dhbw.ka.domain.entities
 
-import de.dhbw.ka.domain.valueobjects.InstrumentAmbitus
+import de.dhbw.ka.domain.valueobjects.InstrumentCategory
+import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 
-class Instrument(val instrumentName: String, val ambitus : InstrumentAmbitus, val id: Int)  {
+data class Instrument(
+    val instrumentIdentification: InstrumentIdentification,
+    val instrumentCategory: InstrumentCategory,
+)
 
-}
 
-enum class InstrumentCategory {
-    WOODWIND,
-    BRASS,
-    PERCUSSION,
-    KEYBOARD,
-    STRING,
-    GUITAR
-}

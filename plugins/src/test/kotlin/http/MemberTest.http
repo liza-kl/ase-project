@@ -2,6 +2,13 @@ GET http://127.0.0.1:9000/members
 Content-Type: application/json
 
 ###
+GET http://127.0.0.1:9000/members/6
+
+###
+GET http://127.0.0.1:9000/members/2
+Content-Type: application/json
+
+###
 POST http://127.0.0.1:9000/members
 Content-Type: application/json
 
@@ -10,3 +17,4 @@ Content-Type: application/json
   "lastName": "Miu",
   "memberStatus": "ACTIVE"
 }
+

@@ -1,7 +1,6 @@
 package de.dhbw.ka.dto
 
 import de.dhbw.ka.datatables.MemberTable
-
 import de.dhbw.ka.domain.entities.Member
 import de.dhbw.ka.domain.valueobjects.MemberName
 import de.dhbw.ka.domain.valueobjects.MemberStatus
@@ -14,15 +13,15 @@ data class MemberDTO(var id: Int = -1, val firstName: String, val lastName: Stri
         fun resultRowToMemberDTO(resultRow: ResultRow): MemberDTO {
             return MemberDTO(
                 id = resultRow[MemberTable.id],
-                firstName = resultRow[MemberTable.forename],
-                lastName = resultRow[MemberTable.lastname],
+                firstName = resultRow[MemberTable.firstName],
+                lastName = resultRow[MemberTable.lastName],
                 memberStatus = resultRow[MemberTable.memberStatus]
             )
         }
 
         fun toMemberDTO(input: Member): MemberDTO {
             return MemberDTO(
-                id = input.id,
+                id = input.memberId,
                 firstName = input.memberName.firstName,
                 lastName = input.memberName.lastName,
                 memberStatus = input.memberStatus.status
@@ -31,7 +30,7 @@ data class MemberDTO(var id: Int = -1, val firstName: String, val lastName: Stri
 
         fun toMember(input: MemberDTO): Member {
             return Member(
-                id = input.id,
+                memberId = input.id,
                 memberName = MemberName(input.firstName, input.lastName),
                 memberStatus = MemberStatus(input.memberStatus)
             )
