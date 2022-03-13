@@ -19,10 +19,6 @@ class MutableListStorage : MemberStorage {
         return memberStorage.find { it.id == memberId }
     }
 
-    override fun update(id: Int) {
-        TODO("Not yet implemented")
-    }
-
     override fun findAll(): List<MemberDTO> {
         return memberStorage
     }

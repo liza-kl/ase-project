@@ -30,10 +30,6 @@ class H2MemberStorage : MemberStorage {
        return resultRowToMemberDTO(result)
     }
 
-    override fun update(id: Int) {
-        TODO("Not yet implemented")
-    }
-
     override fun findAll(): List<MemberDTO> {
         val membersList = mutableListOf<MemberDTO>()
         transaction {

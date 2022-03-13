@@ -1,7 +1,6 @@
 package de.dhbw.ka.storage.h2
 
 import de.dhbw.ka.datatables.RentalEntriesTable
-import de.dhbw.ka.domain.aggregates.InstrumentRentalEntry
 import de.dhbw.ka.dto.RentalInstrumentEntryDTO
 import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.resultRowToRentalInstrumentEntryDTO
 import de.dhbw.ka.storage.InstrumentRentalEntryStorage
@@ -33,7 +32,4 @@ class H2InstrumentRentalEntryStorage : InstrumentRentalEntryStorage {
         return rentedInstrumentsList
     }
 
-    override fun getInstrumentsRentedByMember(): InstrumentRentalEntry {
-        TODO("Not yet implemented")
-    }
 }

@@ -14,10 +14,6 @@ class InstrumentRepositoryImpl(private val instrumentStorage: InstrumentStorage)
         return instrumentStorage.create(instrumentDTO)
     }
 
-    override fun deleteInstrument(instrumentId: InstrumentIdentification): Boolean {
-        TODO("Not yet implemented")
-    }
-
     override fun getAllInstruments(): List<Instrument> {
         val result = instrumentStorage.getAllInstruments()
         return result.map { toInstrument(it) }

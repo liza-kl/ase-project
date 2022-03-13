@@ -5,7 +5,6 @@ import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 
 interface InstrumentRepository {
     fun createInstrument(instrumentData: Instrument) : Boolean
-    fun deleteInstrument(instrumentId: InstrumentIdentification) : Boolean
     fun getAllInstruments() : List<Instrument>
     fun checkIfInstrumentExists(instrumentIdentification: InstrumentIdentification) : Boolean
 }

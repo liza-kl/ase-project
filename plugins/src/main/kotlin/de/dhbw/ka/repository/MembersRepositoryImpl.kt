@@ -18,10 +18,6 @@ class MembersRepositoryImpl(private val memberStorage: MemberStorage) : MemberRe
         return result?.let { toMember(it) }
     }
 
-    override fun update(input: Member): Boolean {
-        TODO("Not yet implemented")
-    }
-
     override fun findAll(): List<Member> {
         val result = memberStorage.findAll()
         return result.map { toMember(it) }
