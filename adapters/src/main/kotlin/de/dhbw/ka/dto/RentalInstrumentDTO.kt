@@ -1,53 +1,47 @@
 package de.dhbw.ka.dto
 
-import de.dhbw.ka.datatables.RentalEntriesTable
-import de.dhbw.ka.domain.aggregates.InstrumentRentalEntry
+import de.dhbw.ka.datatables.RentalInstrumentsTable
+import de.dhbw.ka.domain.aggregates.RentalInstrument
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import org.jetbrains.exposed.sql.ResultRow
-import kotlinx.serialization.*
 
-@Serializable
+@kotlinx.serialization.Serializable
 data class RentalInstrumentDTO(
-    var rentalId: Int = -1, val memberId: Int = -1, val instrumentIdentification: InstrumentIdentificationDTO
+    val instrumentIdentification: InstrumentIdentificationDTO,
+    val quantity: Int
 ) {
     companion object RentalInstrumentMapper {
         fun resultRowToRentalInstrumentDTO(resultRow: ResultRow): RentalInstrumentDTO {
             return RentalInstrumentDTO(
-                rentalId = resultRow[RentalEntriesTable.rentalId],
-                memberId = resultRow[RentalEntriesTable.memberId],
                 instrumentIdentification = InstrumentIdentificationDTO(
-                    instrumentManufacturer = resultRow[RentalEntriesTable.instrumentManufacturer],
-                    instrumentSerialNumber = resultRow[RentalEntriesTable.instrumentSerialNumber],
-                    instrumentType = resultRow[RentalEntriesTable.instrumentType]
-                )
+                    instrumentType = resultRow[RentalInstrumentsTable.instrumentType],
+                    instrumentManufacturer = resultRow[RentalInstrumentsTable.instrumentManufacturer],
+                    instrumentSerialNumber = resultRow[RentalInstrumentsTable.instrumentSerialNumber]
+                ),
+                quantity = resultRow[RentalInstrumentsTable.quantity]
             )
         }
 
-        fun toRentalInstrumentDTO(
-            instrumentRentalEntryData: InstrumentRentalEntry
-        ): RentalInstrumentDTO {
+        fun toRentalInstrumentDTO(rentalInstrument: RentalInstrument): RentalInstrumentDTO {
             return RentalInstrumentDTO(
-                rentalId = instrumentRentalEntryData.rentalEntryId,
-                memberId = instrumentRentalEntryData.memberId,
                 instrumentIdentification = InstrumentIdentificationDTO(
-                    instrumentRentalEntryData.instrumentIdentification.instrumentManufacturer,
-                    instrumentRentalEntryData.instrumentIdentification.instrumentSerialNumber,
-                    instrumentRentalEntryData.instrumentIdentification.instrumentType
-                )
+                    rentalInstrument.instrumentIdentification.instrumentType,
+                    rentalInstrument.instrumentIdentification.instrumentManufacturer,
+                    rentalInstrument.instrumentIdentification.instrumentSerialNumber
+                ),
+                quantity = rentalInstrument.quantity
             )
         }
 
-        fun toRentalInstrument(rentalInstrumentDTOData: RentalInstrumentDTO): InstrumentRentalEntry {
-            return InstrumentRentalEntry(
-                rentalEntryId = rentalInstrumentDTOData.rentalId,
-                memberId = rentalInstrumentDTOData.memberId,
+        fun toRentalInstrument(rentalInstrumentDTO: RentalInstrumentDTO): RentalInstrument {
+            return RentalInstrument(
                 instrumentIdentification = InstrumentIdentification(
-                    rentalInstrumentDTOData.instrumentIdentification.instrumentSerialNumber,
-                    rentalInstrumentDTOData.instrumentIdentification.instrumentManufacturer,
-                    rentalInstrumentDTOData.instrumentIdentification.instrumentType
-                )
+                    rentalInstrumentDTO.instrumentIdentification.instrumentType,
+                    rentalInstrumentDTO.instrumentIdentification.instrumentManufacturer,
+                    rentalInstrumentDTO.instrumentIdentification.instrumentSerialNumber,
+                ),
+                quantity = rentalInstrumentDTO.quantity
             )
         }
-
     }
 }
