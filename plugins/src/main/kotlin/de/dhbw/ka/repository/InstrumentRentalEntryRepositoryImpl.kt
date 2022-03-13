@@ -1,17 +1,17 @@
 package de.dhbw.ka.repository
 
 import de.dhbw.ka.domain.aggregates.InstrumentRentalEntry
-import de.dhbw.ka.domain.repository.InstrumentRentalRepository
+import de.dhbw.ka.domain.repository.InstrumentRentalEntryRepository
 import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
-import de.dhbw.ka.dto.RentalInstrumentDTO
-import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.toRentalInstrument
-import de.dhbw.ka.storage.InstrumentRentalStorage
+import de.dhbw.ka.dto.RentalInstrumentEntryDTO
+import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.toRentalInstrumentEntry
+import de.dhbw.ka.storage.InstrumentRentalEntryStorage
 
-class InstrumentRentalRepositoryImpl(private val instrumentRentalStorage: InstrumentRentalStorage) :
-    InstrumentRentalRepository {
+class InstrumentRentalEntryRepositoryImpl(private val instrumentRentalEntryStorage: InstrumentRentalEntryStorage) :
+    InstrumentRentalEntryRepository {
     override fun borrowInstrument(memberId: Int, instrumentToBeLent: InstrumentIdentification): Boolean {
-        val rentalInstrumentDTO = RentalInstrumentDTO(
+        val rentalInstrumentEntryDTO = RentalInstrumentEntryDTO(
             memberId = memberId,
             instrumentIdentification = InstrumentIdentificationDTO(
                 instrumentToBeLent.instrumentType,
@@ -19,20 +19,20 @@ class InstrumentRentalRepositoryImpl(private val instrumentRentalStorage: Instru
                 instrumentToBeLent.instrumentManufacturer
             )
         )
-        return instrumentRentalStorage.createRentalEntry(
-            rentalInstrumentDTO
+        return instrumentRentalEntryStorage.createRentalEntry(
+            rentalInstrumentEntryDTO
         )
     }
 
     override fun getLentInstrumentByMember(memberId: Int): InstrumentRentalEntry {
-        return instrumentRentalStorage.getInstrumentsRentedByMember(
+        return instrumentRentalEntryStorage.getInstrumentsRentedByMember(
         )
     }
 
     override fun getAllRentalEntries(): List<InstrumentRentalEntry> {
-        val result = instrumentRentalStorage.getAllInstrumentRentalEntries() // TODO Hier sind Ids noch richtig
+        val result = instrumentRentalEntryStorage.getAllInstrumentRentalEntries() // TODO Hier sind Ids noch richtig
         return result.map {
-            toRentalInstrument(it)
+            toRentalInstrumentEntry(it)
         }
     }
 }
