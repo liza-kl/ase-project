@@ -30,7 +30,7 @@ internal object RentalInstrumentEntriesProperties {
         RentalInstrumentRepositoryImpl(rentalInstrumentStorage = H2RentalInstrumentStorage())
 }
 
-fun Route.borrowInstrument() {
+fun Route.rentInstrument() {
     post("/rental") {
         val receivedParams = call.receive<RentalInstrumentEntryDTO>()
         val rentInstrumentUC =
@@ -68,6 +68,6 @@ fun Route.getAllRentedInstrumentEntries() {
 fun Application.registerRentalInstrumentEntriesController() {
     routing {
         getAllRentedInstrumentEntries()
-        borrowInstrument()
+        rentInstrument()
     }
 }

@@ -31,8 +31,8 @@ subprojects {
 
 dependencies {
     implementation("io.ktor:ktor-serialization:$ktorVersion")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest.extensions:kotest-assertions-ktor:1.0.3")
     testImplementation("io.kotest:kotest-property:$kotestVersion")
 }}
