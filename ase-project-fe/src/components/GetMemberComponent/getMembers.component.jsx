@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -25,8 +25,28 @@ export const GetMembersComponent = () => {
     return(
         <div>
             <MembersList>
+                <Table responsive>
+                    <thead>
+                    <tr>
+                        <th>MemberId</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {members.map(member =>
+                        <tr key={member.id}>
+                            <td>{member.id}</td>
+                            <td> {member.firstName} </td>
+                            <td>{member.lastName} </td>
+                            <td>{member.memberStatus}</td>
+                        </tr>
+                        )}
+
+                    </tbody>
+                </Table>
                 <ul>
-                    {members.map(member => <li key={member.id}> <b>{member.id}</b> {member.firstName} {member.lastName} {member.memberStatus}</li>)}
                 </ul>
             </MembersList>
             <Button variant="secondary" type="submit" className="w-100" onClick={onSubmit}>

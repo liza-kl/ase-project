@@ -1,5 +1,5 @@
 import React from "react";
-import {InputGroup, FormControl, Form} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 
 export const RadioButtonInputComponent = (props) => {
     return(

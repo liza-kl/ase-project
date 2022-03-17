@@ -17,6 +17,7 @@ fun Application.module(testing: Boolean = false) {
         receiveEntireContent = true
     }
     install(CORS) {
+        allowNonSimpleContentTypes = true
         anyHost()
     }
     install(ContentNegotiation) {

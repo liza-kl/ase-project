@@ -8,9 +8,9 @@ export function createInstrument(urlToPost, instrumentData) {
         instrumentCategory: instrumentData.instrumentCategory,
     })
         .then(function (response) {
-            console.log(`You've successfully created an Instrument`)
+           alert(`You've successfully created an Instrument`)
         })
         .catch(function (error) {
-            console.log(error);
+            alert(error);
         });
 }

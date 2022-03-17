@@ -53,7 +53,7 @@ fun Route.addMember() {
         createNewMemberUC.execute(toMember(receivedMemberParams))
         call.respondText(
             "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
-            status = HttpStatusCode.Created
+            status = HttpStatusCode.OK
         )
     }
 }

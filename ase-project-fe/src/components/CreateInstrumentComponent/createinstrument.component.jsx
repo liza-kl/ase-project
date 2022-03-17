@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import {Button, Form} from "react-bootstrap";
-import {RadioButtonInputComponent} from "../../RadioButtonInput/radio-button-input.component";
+import {RadioButtonInputComponent} from "../RadioButtonInput/radio-button-input.component";
 import {createInstrument} from "../../apis/instruments/instruments.api";
 import {instrumentCategoryOptions} from "./createInstrument.data";
 import styled from "styled-components";

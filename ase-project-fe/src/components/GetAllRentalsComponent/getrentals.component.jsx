@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -24,14 +24,31 @@ export const GetRentalsComponent = () => {
 
     return(
         <div>
-            <MembersList>
-                <ul>
+            <RentalsList>
+                <Table responsive>
+                    <thead>
+                    <tr>
+                        <th>Rental Id</th>
+                        <th>Member Id</th>
+                        <th>Instrument Type</th>
+                        <th>Instrument Serial Number</th>
+                        <th>Instrument Manufacturer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {rentals.map(rental =>
-                        <li key={rental.rentalId}> <b>{rental.rentalId}</b> {rental.memberId} {rental.instrumentIdentification.instrumentType}
-                            {rental.instrumentIdentification.instrumentSerialNumber} {rental.instrumentIdentification.instrumentManufacturer}
-                        </li>)}
-                </ul>
-            </MembersList>
+                        <tr>
+                            <td>{rental.rentalId}</td>
+                            <td>{rental.memberId}</td>
+                            <td>{rental.instrumentIdentification.instrumentType}</td>
+                            <td>{rental.instrumentIdentification.instrumentSerialNumber}</td>
+                            <td>{rental.instrumentIdentification.instrumentManufacturer}</td>
+                        </tr>
+
+                    )}
+                    </tbody>
+                </Table>
+            </RentalsList>
             <Button variant="secondary" type="submit" className="w-100" onClick={onSubmit}>
                 Get All Rentals
             </Button>
@@ -40,7 +57,7 @@ export const GetRentalsComponent = () => {
     )
 }
 
-const MembersList = styled.div`
+const RentalsList = styled.div`
     overflow: auto;
     max-height: 10em;
     margin-bottom: 1em;

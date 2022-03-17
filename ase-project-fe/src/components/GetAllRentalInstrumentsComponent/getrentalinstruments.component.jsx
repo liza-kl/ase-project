@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -26,16 +26,27 @@ export const GetRentalInstrumentsComponent = () => {
     return(
         <div>
             <InstrumentsList>
-                <ul>
+                <Table responsive>
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Manufacturer</th>
+                        <th>Serial Number</th>
+                        <th>Available Quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {instruments.map(instrument =>
-                        <li>
-                            <b>{instrument.instrumentIdentification.instrumentType}</b>
-                            {instrument.instrumentIdentification.instrumentSerialNumber}
-                            {instrument.instrumentIdentification.instrumentManufacturer}
-                            {instrument.quantity}
-                        </li>
+                        <tr>
+                            <td>{instrument.instrumentIdentification.instrumentType}</td>
+                            <td>{instrument.instrumentIdentification.instrumentSerialNumber}</td>
+                            <td>{instrument.instrumentIdentification.instrumentManufacturer}</td>
+                            <td>{instrument.quantity}</td>
+                        </tr>
+
                     )}
-                </ul>
+                    </tbody>
+                </Table>
             </InstrumentsList>
             <Button variant="secondary" type="submit" className="w-100" onClick={onSubmit}>
                 Get Rental Instruments

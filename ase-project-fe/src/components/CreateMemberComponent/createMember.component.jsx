@@ -1,8 +1,9 @@
 import React, {useState} from "react"
 import {Button, Form} from "react-bootstrap";
-import {RadioButtonInputComponent} from "../../RadioButtonInput/radio-button-input.component";
+import {RadioButtonInputComponent} from "../RadioButtonInput/radio-button-input.component";
 import {createMember} from "../../apis/instruments/members.api";
 import {radioButtonsOptions} from "./createMember.data";
+import styled from "styled-components";
 
 export const CreateMemberComponent = () => {
     const [firstName, setFirstName] = useState("");
@@ -20,6 +21,7 @@ export const CreateMemberComponent = () => {
                               placeholder="First Name" className="mb-1" value={firstName}/>
                 <Form.Control type="text" name="lastName" placeholder="Last Name" className="mb-1" value={lastName}
                               onChange={(e) => setLastName(e.target.value)}/>
+                <RadioButtons>
                 {
                     radioButtonsOptions.map(input => {
                         return (
@@ -30,6 +32,7 @@ export const CreateMemberComponent = () => {
                         )
                     })
                 }
+                </RadioButtons>
             </Form.Group>
             <Button variant="secondary" type="submit" className="w-100" onClick={onSubmit}>
                 Create Member
@@ -37,3 +40,8 @@ export const CreateMemberComponent = () => {
         </Form>
     )
 }
+
+const RadioButtons = styled.div`
+    margin: 1em 0 1em 0;
+`
+

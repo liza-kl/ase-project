@@ -9,7 +9,7 @@ import rentalsUcData from "../CardGrid/rentals-uc-data";
 export const HomeComponent = () => {
     return (
         <AppContainer className="container-fluid">
-            <h1 className="mt-5 mb-5">Musikvereinsverwaltung</h1>
+            <h1 className="mt-5 mb-5">Music Society Manager</h1>
                 <CardsContainer>
                     <CardGridComponent key={1} useCases={membersUcData}/>
                     <CardGridComponent key={2} useCases={instrumentsUcData}/>
