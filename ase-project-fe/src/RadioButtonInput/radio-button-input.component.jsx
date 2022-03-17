@@ -6,6 +6,7 @@ export const RadioButtonInputComponent = (props) => {
         <div key={props.id} className="mb-3">
             <Form.Check
                 type="radio"
+                name={props.name}
                 id={props.id}
                 label={props.title}
             />

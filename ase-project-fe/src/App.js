@@ -1,12 +1,14 @@
 import './App.css';
-import {LayoutComponent} from "./components/Layout/layout.component";
+import {HomeComponent} from "./components/Layout/layout.component";
+import {
+    Routes, Route, Router,
+} from "react-router-dom";
+
 
 function App() {
-  return (
-    <LayoutComponent>
-
-    </LayoutComponent>
-  );
+    return (
+        <HomeComponent/>
+    );
 }
 
 export default App;

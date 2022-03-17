@@ -1,20 +1,32 @@
 import React from "react"
 import {CardGridComponent} from "../CardGrid/card-grid.component";
 import styled from "styled-components";
-export const LayoutComponent = ({props}) => {
-    return(
+import membersUcData from "../CardGrid/members-uc-data";
+import rentalinstrumentsUcData from "../CardGrid/rentalinstruments-uc-data";
+import instrumentsUcData from "../CardGrid/instruments-uc-data";
+import rentalsUcData from "../CardGrid/rentals-uc-data";
+
+export const HomeComponent = () => {
+    return (
         <AppContainer className="container-fluid">
-            <h1 className="mb-5">Musikvereinsverwaltung</h1>
-            <CardGridComponent/>
-        </AppContainer>
+            <h1 className="mt-5 mb-5">Musikvereinsverwaltung</h1>
+                <CardsContainer>
+                    <CardGridComponent key={1} useCases={membersUcData}/>
+                    <CardGridComponent key={2} useCases={instrumentsUcData}/>
+                    <CardGridComponent key={3} useCases={rentalinstrumentsUcData}/>
+                    <CardGridComponent key={4} useCases={rentalsUcData}/>
+                </CardsContainer>
+            </AppContainer>
     )
 }
 
 const AppContainer = styled.div`
-    flex-direction: column;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%
+    flex-direction: column;
+`
+
+const CardsContainer = styled.div`
+    width: 100%
 `
