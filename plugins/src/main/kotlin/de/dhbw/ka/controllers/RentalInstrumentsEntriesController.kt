@@ -39,17 +39,23 @@ fun Route.borrowInstrument() {
                 rentalInstrumentRepository,
                 memberRepository
             )
-        rentInstrumentUC.execute(
-            receivedParams.memberId,
-            InstrumentIdentification(
-                instrumentManufacturer = receivedParams.instrumentIdentification.instrumentManufacturer,
-                instrumentSerialNumber = receivedParams.instrumentIdentification.instrumentSerialNumber,
-                instrumentType = receivedParams.instrumentIdentification.instrumentType
+        try {
+            rentInstrumentUC.execute(
+                receivedParams.memberId,
+                InstrumentIdentification(
+                    instrumentManufacturer = receivedParams.instrumentIdentification.instrumentManufacturer,
+                    instrumentSerialNumber = receivedParams.instrumentIdentification.instrumentSerialNumber,
+                    instrumentType = receivedParams.instrumentIdentification.instrumentType
+                )
             )
-        )
-        call.respondText("Successfully borrowed an Instrument", status = HttpStatusCode.Created)
+            call.respondText("Successfully borrowed an Instrument", status = HttpStatusCode.Created)
+        } catch (e: IllegalArgumentException) {
+            call.respondText("Oh no something went wrong! ${e.message}", status = HttpStatusCode.Forbidden)
+        }
     }
+
 }
+
 
 fun Route.getAllRentedInstrumentEntries() {
 

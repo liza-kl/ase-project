@@ -26,7 +26,6 @@ fun Route.getMembers() {
         val getAllMembersUC = GetAllMembers(memberRepository = memberRepository)
         val members: List<Member> = getAllMembersUC.execute()
         val someList = mutableListOf<MemberDTO>()
-
         for (member in members) {
             val memberDTO = toMemberDTO(member)
             someList.add(memberDTO)
@@ -50,11 +49,19 @@ fun Route.addMember() {
     post("/members") {
         val receivedMemberParams = call.receive<MemberDTO>()
         val createNewMemberUC = CreateNewMember(memberRepository = memberRepository)
-        createNewMemberUC.execute(toMember(receivedMemberParams))
-        call.respondText(
-            "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
-            status = HttpStatusCode.OK
-        )
+        try {
+            createNewMemberUC.execute(toMember(receivedMemberParams))
+            call.respondText(
+                "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
+                status = HttpStatusCode.OK
+            )
+        } catch(e : Exception ) {
+            call.respondText(
+                "Unfortunately something went wrong ${e.message}",
+                status = HttpStatusCode.NotFound
+            )
+        }
+
     }
 }
 
