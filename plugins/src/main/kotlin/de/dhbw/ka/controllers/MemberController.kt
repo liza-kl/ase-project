@@ -10,7 +10,7 @@ import de.dhbw.ka.members.CreateNewMember
 import de.dhbw.ka.members.FindMemberById
 import de.dhbw.ka.members.GetAllMembers
 import de.dhbw.ka.repository.MembersRepositoryImpl
-import de.dhbw.ka.storage.h2.H2MemberStorage
+import de.dhbw.ka.storage.factories.StandardMemberStorageFactory
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -18,7 +18,11 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 internal object MemberControllerProperties {
-    val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
+    private val memberStorageFactory = StandardMemberStorageFactory()
+    private val memberStorage = memberStorageFactory.createMemberStorageFromType("h2")
+    val memberRepository: MemberRepository = MembersRepositoryImpl(
+        memberStorage = memberStorage
+    )
 }
 
 fun Route.getMembers() {
