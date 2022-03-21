@@ -33,11 +33,16 @@ fun Route.addInstrument() {
     post("/instruments") {
         val receivedInstrumentParams = call.receive<InstrumentDTO>()
         val createNewInstrumentUC = CreateInstrument(instrumentRepository = InstrumentProperties.instrumentRepository)
-        createNewInstrumentUC.execute(toInstrument(receivedInstrumentParams))
-        call.respondText(
-            "Successfully created the instrument with the id ${receivedInstrumentParams}! ",
-            status = HttpStatusCode.Created
-        )
+        try {
+            createNewInstrumentUC.execute(toInstrument(receivedInstrumentParams))
+            call.respondText(
+                "Successfully created the instrument with the id ${receivedInstrumentParams}! ",
+                status = HttpStatusCode.Created
+            )
+        } catch (e: Exception) {
+            call.respondText("Unfortunately something went wrong, ${e.message}")
+        }
+
     }
 }
 

@@ -36,8 +36,8 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
     override fun checkIfRentalInstrumentExists(instrumentIdentificationDTO: InstrumentIdentificationDTO): Boolean {
         transaction {
             RentalInstrumentsTable.select {
-                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
-                (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer) and
+                (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber) and
                 (RentalInstrumentsTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
             }.firstOrNull()
         } ?: return false
