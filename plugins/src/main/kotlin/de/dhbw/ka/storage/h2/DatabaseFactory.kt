@@ -3,20 +3,23 @@ package de.dhbw.ka.storage.h2
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import de.dhbw.ka.datatables.InstrumentTable
-import de.dhbw.ka.datatables.RentalEntriesTable
 import de.dhbw.ka.datatables.MemberTable
+import de.dhbw.ka.datatables.RentalEntriesTable
 import de.dhbw.ka.datatables.RentalInstrumentsTable
 import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.resultRowToInstrumentDTO
-import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.resultRowToRentalInstrumentEntryDTO
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.resultRowToMemberDTO
+import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.resultRowToRentalInstrumentEntryDTO
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SchemaUtils.create
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
+    private const val SAMPLE_SERIAL_NUMBER = "YHR-567D"
+    private const val SAMPLE_MANUFACTURER = "Yamaha"
+    private const val SAMPLE_INSTRUMENT_TYPE = "French Horn"
+
     fun init() {
         Database.connect(hikari())
-
         transaction {
             addLogger(StdOutSqlLogger)
             create(InstrumentTable)
@@ -33,9 +36,9 @@ object DatabaseFactory {
     private fun sampleRentalInstruments() {
         transaction {
             RentalInstrumentsTable.insert {
-                it[instrumentType] = "French Horn"
-                it[instrumentSerialNumber] = "YHR-567D"
-                it[instrumentManufacturer] = "Yamaha"
+                it[instrumentType] = SAMPLE_INSTRUMENT_TYPE
+                it[instrumentSerialNumber] = SAMPLE_SERIAL_NUMBER
+                it[instrumentManufacturer] = SAMPLE_MANUFACTURER
                 it[quantity] = 1
             }
         }
@@ -60,9 +63,9 @@ object DatabaseFactory {
     private fun sampleMusicInstruments() {
         transaction {
             InstrumentTable.insert {
-                it[instrumentType] = "French Horn"
-                it[instrumentSerialNumber] = "YHR-567D"
-                it[instrumentManufacturer] = "Yamaha"
+                it[instrumentType] = SAMPLE_INSTRUMENT_TYPE
+                it[instrumentSerialNumber] = SAMPLE_INSTRUMENT_TYPE
+                it[instrumentManufacturer] = SAMPLE_MANUFACTURER
                 it[instrumentCategory] = "BRASS"
             }
         }
@@ -73,9 +76,9 @@ object DatabaseFactory {
         transaction {
             RentalEntriesTable.insert {
                 it[this.memberId] = 1
-                it[this.instrumentType] = "French Horn"
-                it[this.instrumentSerialNumber] = "YHR-567D"
-                it[this.instrumentManufacturer] = "Yamaha"
+                it[this.instrumentType] = SAMPLE_INSTRUMENT_TYPE
+                it[this.instrumentSerialNumber] = SAMPLE_INSTRUMENT_TYPE
+                it[this.instrumentManufacturer] = SAMPLE_MANUFACTURER
             }
             println("Sample Rentals: ${RentalEntriesTable.selectAll().map{ resultRowToRentalInstrumentEntryDTO(it) }}")
 
