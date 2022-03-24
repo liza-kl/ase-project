@@ -54,7 +54,7 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
                     (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
                 }.firstOrNull()
         }
-        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue // TODO Proper Casting!!!
+        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue
     }
 
     override fun decreaseQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO) {

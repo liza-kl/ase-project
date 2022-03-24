@@ -12,6 +12,8 @@ enum class InstrumentCategoryOptions {
 @JvmInline
 value class InstrumentCategory(val instrumentCategory: String) {
     init {
-        InstrumentCategoryOptions.valueOf(instrumentCategory)
+        require(InstrumentCategoryOptions.valueOf(instrumentCategory).toString() == instrumentCategory) {
+            "Oh no"
+        }
     }
 }

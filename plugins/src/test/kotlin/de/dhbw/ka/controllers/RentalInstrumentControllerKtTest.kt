@@ -21,17 +21,19 @@ import io.mockk.mockk
  */
 class RentalInstrumentControllerKtTest : FunSpec({
 
-    val rentalInstrumentRepository = mockk<RentalInstrumentRepository>(relaxed=true)
-    val instrumentRepository = mockk<InstrumentRepository>(relaxed=true)
+    val rentalInstrumentRepository = mockk<RentalInstrumentRepository>(relaxed = true)
+    val instrumentRepository = mockk<InstrumentRepository>(relaxed = true)
     val useCase = CreateRentalInstrument(rentalInstrumentRepository, instrumentRepository)
-    val rentalInstrument = RentalInstrument(
-        InstrumentIdentification("Yamaha", "YHR-567D", "French Horn"),
-        3
-    )
-    test("Should not create a Rental Instrument") {
-        val exception = shouldThrow<Exception> {
-            useCase.execute(rentalInstrument)         }
 
+    test("Should not create a Rental Instrument") {
+        val rentalInstrument = RentalInstrument(
+            InstrumentIdentification("Yamaha", "YHR-567D", "French Horn"),
+            3
+        )
+        val exception = shouldThrow<Exception> {
+            useCase.execute(rentalInstrument)
+        }
         exception.message should startWith("Instrument must be present in the Instrument database")
     }
+
 })
