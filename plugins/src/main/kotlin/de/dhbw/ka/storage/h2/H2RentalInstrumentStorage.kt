@@ -4,7 +4,7 @@ import de.dhbw.ka.datatables.RentalInstrumentsTable
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
-import de.dhbw.ka.storage.RentalInstrumentStorage
+import de.dhbw.ka.storage.interfaces.RentalInstrumentStorage
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.math.absoluteValue
@@ -54,7 +54,7 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
                     (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
                 }.firstOrNull()
         }
-        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue // TODO Proper Casting!!!
+        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue
     }
 
     override fun decreaseQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO) {

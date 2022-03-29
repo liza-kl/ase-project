@@ -4,7 +4,7 @@ import de.dhbw.ka.domain.entities.Member
 import de.dhbw.ka.domain.repository.MemberRepository
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.toMember
 import de.dhbw.ka.dto.MemberDTO.MemberMapper.toMemberDTO
-import de.dhbw.ka.storage.MemberStorage
+import de.dhbw.ka.storage.interfaces.MemberStorage
 
 class MembersRepositoryImpl(private val memberStorage: MemberStorage) : MemberRepository {
 

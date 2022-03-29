@@ -23,6 +23,9 @@ class RentInstrument(
 
     fun execute(memberId: Int, instrumentData: InstrumentIdentification): Boolean {
         val findMember = memberRepository.findById(id = memberId)
+        /* TODO Strategy Pattern, Interface RentalRule / SpecificationPattern (MemberSpec, InstrumentExistsSpec)
+            RentalRequest
+         */
         if (findMember?.memberStatus != MemberStatus("ACTIVE")) {
             throw IllegalArgumentException("Member must be ACTIVE to be able to borrow an Instrument")
         }
@@ -33,6 +36,6 @@ class RentInstrument(
             throw IllegalArgumentException("There is no rental instrument available at the moment!")
         }
         rentalInstrumentRepository.decreaseQuantity(instrumentData)
-        return instrumentRentalEntryRepository.rentInstrument(memberId,instrumentData)
+        return instrumentRentalEntryRepository.rentInstrument(memberId, instrumentData)
     }
 }
