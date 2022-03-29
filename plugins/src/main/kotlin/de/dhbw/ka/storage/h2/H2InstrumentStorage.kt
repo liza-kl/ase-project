@@ -3,7 +3,7 @@ package de.dhbw.ka.storage.h2
 import de.dhbw.ka.datatables.InstrumentTable
 import de.dhbw.ka.dto.InstrumentDTO
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
-import de.dhbw.ka.storage.InstrumentStorage
+import de.dhbw.ka.storage.interfaces.InstrumentStorage
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll

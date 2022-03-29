@@ -39,8 +39,12 @@ fun Route.createRentalInstrument() {
     post("/rentalinstruments") {
         val rentalInstrumentParams = call.receive<RentalInstrumentDTO>()
         val createRentalInstrumentUC = CreateRentalInstrument(rentalInstrumentRepository, instrumentRepository)
-        createRentalInstrumentUC.execute(toRentalInstrument(rentalInstrumentParams))
-        call.respondText { "Successfully created a new rental instrument" }
+        try {
+            createRentalInstrumentUC.execute(toRentalInstrument(rentalInstrumentParams))
+            call.respondText { "Successfully created a new rental instrument" }
+        } catch (e: Exception) {
+            call.respondText { "Unfortunately something went wront ${e.message}" }
+        }
     }
 }
 

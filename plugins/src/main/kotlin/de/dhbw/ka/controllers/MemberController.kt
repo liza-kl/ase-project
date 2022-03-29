@@ -10,7 +10,7 @@ import de.dhbw.ka.members.CreateNewMember
 import de.dhbw.ka.members.FindMemberById
 import de.dhbw.ka.members.GetAllMembers
 import de.dhbw.ka.repository.MembersRepositoryImpl
-import de.dhbw.ka.storage.h2.H2MemberStorage
+import de.dhbw.ka.storage.factories.StandardMemberStorageFactory
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -18,7 +18,11 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 internal object MemberControllerProperties {
-    val memberRepository: MemberRepository = MembersRepositoryImpl(memberStorage = H2MemberStorage())
+    private val memberStorageFactory = StandardMemberStorageFactory()
+    private val memberStorage = memberStorageFactory.createMemberStorageFromType("h2")
+    val memberRepository: MemberRepository = MembersRepositoryImpl(
+        memberStorage = memberStorage
+    )
 }
 
 fun Route.getMembers() {
@@ -26,7 +30,6 @@ fun Route.getMembers() {
         val getAllMembersUC = GetAllMembers(memberRepository = memberRepository)
         val members: List<Member> = getAllMembersUC.execute()
         val someList = mutableListOf<MemberDTO>()
-
         for (member in members) {
             val memberDTO = toMemberDTO(member)
             someList.add(memberDTO)
@@ -50,11 +53,19 @@ fun Route.addMember() {
     post("/members") {
         val receivedMemberParams = call.receive<MemberDTO>()
         val createNewMemberUC = CreateNewMember(memberRepository = memberRepository)
-        createNewMemberUC.execute(toMember(receivedMemberParams))
-        call.respondText(
-            "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
-            status = HttpStatusCode.Created
-        )
+        try {
+            createNewMemberUC.execute(toMember(receivedMemberParams))
+            call.respondText(
+                "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
+                status = HttpStatusCode.OK
+            )
+        } catch(e : Exception ) {
+            call.respondText(
+                "Unfortunately something went wrong ${e.message}",
+                status = HttpStatusCode.NotFound
+            )
+        }
+
     }
 }
 

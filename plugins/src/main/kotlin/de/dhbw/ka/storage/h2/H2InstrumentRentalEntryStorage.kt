@@ -3,7 +3,7 @@ package de.dhbw.ka.storage.h2
 import de.dhbw.ka.datatables.RentalEntriesTable
 import de.dhbw.ka.dto.RentalInstrumentEntryDTO
 import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.resultRowToRentalInstrumentEntryDTO
-import de.dhbw.ka.storage.InstrumentRentalEntryStorage
+import de.dhbw.ka.storage.interfaces.InstrumentRentalEntryStorage
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction

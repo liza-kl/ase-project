@@ -4,7 +4,7 @@ import de.dhbw.ka.datatables.RentalInstrumentsTable
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
-import de.dhbw.ka.storage.RentalInstrumentStorage
+import de.dhbw.ka.storage.interfaces.RentalInstrumentStorage
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.math.absoluteValue
@@ -36,8 +36,8 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
     override fun checkIfRentalInstrumentExists(instrumentIdentificationDTO: InstrumentIdentificationDTO): Boolean {
         transaction {
             RentalInstrumentsTable.select {
-                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
-                (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer) and
+                (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber) and
                 (RentalInstrumentsTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
             }.firstOrNull()
         } ?: return false
@@ -54,7 +54,7 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
                     (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
                 }.firstOrNull()
         }
-        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue // TODO Proper Casting!!!
+        return (result?.get(RentalInstrumentsTable.quantity) as Int).absoluteValue
     }
 
     override fun decreaseQuantity(instrumentIdentificationDTO: InstrumentIdentificationDTO) {

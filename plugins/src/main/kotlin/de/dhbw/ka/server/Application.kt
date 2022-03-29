@@ -17,13 +17,13 @@ fun Application.module(testing: Boolean = true) {
         receiveEntireContent = true
     }
     install(CORS) {
+        allowNonSimpleContentTypes = true
         anyHost()
     }
     install(ContentNegotiation) {
         json()
     }
     DatabaseFactory.init()
-
     configureRouting()
     registerMemberController()
     registerInstrumentController()

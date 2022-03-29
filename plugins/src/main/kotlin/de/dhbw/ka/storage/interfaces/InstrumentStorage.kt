@@ -1,4 +1,4 @@
-package de.dhbw.ka.storage
+package de.dhbw.ka.storage.interfaces
 
 import de.dhbw.ka.dto.InstrumentDTO
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
