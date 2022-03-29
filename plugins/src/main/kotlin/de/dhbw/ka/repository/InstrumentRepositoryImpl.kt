@@ -6,7 +6,7 @@ import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrument
 import de.dhbw.ka.dto.InstrumentDTO.InstrumentMapper.toInstrumentDTO
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
-import de.dhbw.ka.storage.InstrumentStorage
+import de.dhbw.ka.storage.interfaces.InstrumentStorage
 
 class InstrumentRepositoryImpl(private val instrumentStorage: InstrumentStorage) : InstrumentRepository {
     override fun createInstrument(instrumentData: Instrument): Boolean {

@@ -6,7 +6,7 @@ import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentEntryDTO
 import de.dhbw.ka.dto.RentalInstrumentEntryDTO.RentalInstrumentEntryMapper.toRentalInstrumentEntry
-import de.dhbw.ka.storage.InstrumentRentalEntryStorage
+import de.dhbw.ka.storage.interfaces.InstrumentRentalEntryStorage
 
 class InstrumentRentalEntryRepositoryImpl(private val instrumentRentalEntryStorage: InstrumentRentalEntryStorage) :
     InstrumentRentalEntryRepository {

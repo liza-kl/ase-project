@@ -7,7 +7,7 @@ import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.toRentalInstrument
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.toRentalInstrumentDTO
-import de.dhbw.ka.storage.RentalInstrumentStorage
+import de.dhbw.ka.storage.interfaces.RentalInstrumentStorage
 
 class RentalInstrumentRepositoryImpl(private val rentalInstrumentStorage: RentalInstrumentStorage) :
     RentalInstrumentRepository {

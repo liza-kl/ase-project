@@ -24,7 +24,6 @@ fun Application.module(testing: Boolean = false) {
         json()
     }
     DatabaseFactory.init()
-
     configureRouting()
     registerMemberController()
     registerInstrumentController()

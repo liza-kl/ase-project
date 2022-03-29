@@ -19,13 +19,13 @@ import io.mockk.mockk
 /**
  * Test with a mock
  */
-class RentalInstrumentControllerKtTest : FunSpec({
+class ControllerTests : FunSpec({
 
     val rentalInstrumentRepository = mockk<RentalInstrumentRepository>(relaxed = true)
     val instrumentRepository = mockk<InstrumentRepository>(relaxed = true)
-    val useCase = CreateRentalInstrument(rentalInstrumentRepository, instrumentRepository)
 
     test("Should not create a Rental Instrument") {
+        val useCase = CreateRentalInstrument(rentalInstrumentRepository, instrumentRepository)
         val rentalInstrument = RentalInstrument(
             InstrumentIdentification("Yamaha", "YHR-567D", "French Horn"),
             3

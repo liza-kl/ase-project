@@ -4,7 +4,7 @@ import de.dhbw.ka.domain.aggregates.InstrumentRentalEntry
 import de.dhbw.ka.domain.repository.InstrumentRentalEntryRepository
 
 class GetAllInstrumentRentalEntries(private val instrumentRentalEntryRepository: InstrumentRentalEntryRepository) {
-    fun execute() : List<InstrumentRentalEntry> {
+     fun execute() : List<InstrumentRentalEntry> {
         return instrumentRentalEntryRepository.getAllRentalEntries()
     }
 }

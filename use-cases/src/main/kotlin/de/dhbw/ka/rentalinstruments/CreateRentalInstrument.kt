@@ -23,10 +23,7 @@ class CreateRentalInstrument(
         doesRentalInstrumentExists: CheckIfRentalInstrumentExists
     ) {
         if (!doesInstrumentExist.execute(rentalInstrument.instrumentIdentification)) {
-            throw Exception(
-                "Instrument must be present in the Instrument database in order to create a" +
-                        "Rental instrument"
-            )
+            throw Exception("Instrument must be present in the Instrument database in order to create a Rental instrument")
         }
         if (doesRentalInstrumentExists.execute(rentalInstrument.instrumentIdentification)) {
             throw Exception("The same Rental Instrument can't be created twice")

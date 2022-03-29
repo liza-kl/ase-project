@@ -4,7 +4,7 @@ import de.dhbw.ka.datatables.RentalInstrumentsTable
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
-import de.dhbw.ka.storage.RentalInstrumentStorage
+import de.dhbw.ka.storage.interfaces.RentalInstrumentStorage
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import kotlin.math.absoluteValue
