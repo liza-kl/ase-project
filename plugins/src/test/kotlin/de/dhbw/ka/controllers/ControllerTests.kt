@@ -30,9 +30,6 @@ import io.mockk.verify
  * Used Mocking Library: mockk.io
  */
 
-/**
- * Test with a mock
- */
 class ControllerTests : FunSpec({
 
     val rentalInstrumentRepository = mockk<RentalInstrumentRepository>(relaxed = true)
@@ -75,7 +72,6 @@ class ControllerTests : FunSpec({
             useCase.execute(rentalInstrument)
         }
         exception.message should startWith("The same Rental Instrument can't be created twice")
-
     }
 
     test("Should create Rental Instrument") {
@@ -93,7 +89,6 @@ class ControllerTests : FunSpec({
                 InstrumentCategory("BRASS"),
             )
         )
-
         withTestApplication({ module(testing = true) }) {
             handleRequest(HttpMethod.Get, "/instruments").apply {
                 response shouldHaveStatus HttpStatusCode.OK
