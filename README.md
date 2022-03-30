@@ -3,7 +3,8 @@ Software Project for the Advanced Software Engineering lecture at the Cooperativ
 
 # Installation
 
-1. Clone Repository
+1. Clone Repository and go to the project root directory
+
 ```
 git clone git@github.com:liza-kl/ase-project.git 
 ```
@@ -13,7 +14,8 @@ git clone git@github.com:liza-kl/ase-project.git
 ./gradlew run 
 ```
 
-3. Go to Frontend-Directory and run 
+3. Go to the Frontend Directory and run the npm script
 ```
+cd ./ase-project-fe
 npm run start
 ```
