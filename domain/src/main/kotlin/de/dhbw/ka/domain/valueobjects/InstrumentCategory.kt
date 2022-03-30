@@ -13,7 +13,7 @@ enum class InstrumentCategoryOptions {
 value class InstrumentCategory(val instrumentCategory: String) {
     init {
         require(InstrumentCategoryOptions.valueOf(instrumentCategory).toString() == instrumentCategory) {
-            "Oh no"
+            throw IllegalArgumentException("Please provide a valid Instrument Category.")
         }
     }
 }
