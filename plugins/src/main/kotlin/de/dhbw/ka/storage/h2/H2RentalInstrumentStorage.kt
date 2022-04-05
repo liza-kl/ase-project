@@ -1,6 +1,7 @@
 package de.dhbw.ka.storage.h2
 
 import de.dhbw.ka.datatables.RentalInstrumentsTable
+import de.dhbw.ka.domain.valueobjects.InstrumentIdentification
 import de.dhbw.ka.dto.InstrumentIdentificationDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO
 import de.dhbw.ka.dto.RentalInstrumentDTO.RentalInstrumentMapper.resultRowToRentalInstrumentDTO
@@ -70,4 +71,16 @@ class H2RentalInstrumentStorage : RentalInstrumentStorage {
             }
         }
     }
-}
+
+    override fun getRentalInstrumentByIdentification(instrumentIdentificationDTO: InstrumentIdentification): RentalInstrumentDTO? {
+        val result = transaction {
+            RentalInstrumentsTable.select {
+                (RentalInstrumentsTable.instrumentManufacturer eq instrumentIdentificationDTO.instrumentManufacturer)
+                (RentalInstrumentsTable.instrumentType eq instrumentIdentificationDTO.instrumentType)
+                (RentalInstrumentsTable.instrumentSerialNumber eq instrumentIdentificationDTO.instrumentSerialNumber)
+            }.single()
+        }
+        return resultRowToRentalInstrumentDTO(result)
+    }
+    }
+

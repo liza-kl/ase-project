@@ -26,7 +26,8 @@ class RentalInstrumentRepositoryImpl(private val rentalInstrumentStorage: Rental
         val instrumentIdentificationDTO = InstrumentIdentificationDTO(
             instrumentManufacturer = instrumentIdentification.instrumentManufacturer,
             instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
-            instrumentType = instrumentIdentification.instrumentType)
+            instrumentType = instrumentIdentification.instrumentType
+        )
         return rentalInstrumentStorage.checkIfRentalInstrumentExists(instrumentIdentificationDTO)
 
     }
@@ -35,15 +36,22 @@ class RentalInstrumentRepositoryImpl(private val rentalInstrumentStorage: Rental
         val instrumentIdentificationDTO = InstrumentIdentificationDTO(
             instrumentIdentification.instrumentManufacturer,
             instrumentIdentification.instrumentSerialNumber,
-            instrumentType = instrumentIdentification.instrumentType)
+            instrumentType = instrumentIdentification.instrumentType
+        )
         return rentalInstrumentStorage.checkAvailableQuantity(instrumentIdentificationDTO)
+    }
+
+    override fun getRentalInstrumentByIdentification(instrumentIdentification: InstrumentIdentification): RentalInstrument? {
+        val result = rentalInstrumentStorage.getRentalInstrumentByIdentification(instrumentIdentification)
+        return result?.let { toRentalInstrument(it) }
     }
 
     override fun decreaseQuantity(instrumentIdentification: InstrumentIdentification) {
         val instrumentIdentificationDTO = InstrumentIdentificationDTO(
             instrumentManufacturer = instrumentIdentification.instrumentManufacturer,
             instrumentSerialNumber = instrumentIdentification.instrumentSerialNumber,
-            instrumentType = instrumentIdentification.instrumentType)
+            instrumentType = instrumentIdentification.instrumentType
+        )
         return rentalInstrumentStorage.decreaseQuantity(instrumentIdentificationDTO)
     }
 

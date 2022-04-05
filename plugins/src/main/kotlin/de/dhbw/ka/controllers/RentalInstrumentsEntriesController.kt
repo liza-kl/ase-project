@@ -37,7 +37,7 @@ fun Route.rentInstrument() {
             RentInstrument(
                 instrumentRentalEntryRepository,
                 rentalInstrumentRepository,
-                memberRepository
+                memberRepository,
             )
         try {
             rentInstrumentUC.execute(
@@ -47,6 +47,7 @@ fun Route.rentInstrument() {
                     instrumentSerialNumber = receivedParams.instrumentIdentification.instrumentSerialNumber,
                     instrumentType = receivedParams.instrumentIdentification.instrumentType
                 )
+
             )
             call.respondText("Successfully borrowed an Instrument", status = HttpStatusCode.Created)
         } catch (e: IllegalArgumentException) {

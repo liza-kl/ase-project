@@ -25,7 +25,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
     testImplementation("io.kotest.extensions:kotest-assertions-ktor:1.0.3")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
-    implementation("io.mockk:mockk:1.11.0")
+    implementation("io.mockk:mockk:1.12.3")
     implementation("io.ktor:ktor-html-builder:$ktorVersion")
 
 }
