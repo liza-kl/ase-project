@@ -37,7 +37,7 @@ export const GetRentalsComponent = () => {
                     </thead>
                     <tbody>
                     {rentals.map(rental =>
-                        <tr>
+                        <tr key={rental.rentalId}>
                             <td>{rental.rentalId}</td>
                             <td>{rental.memberId}</td>
                             <td>{rental.instrumentIdentification.instrumentType}</td>

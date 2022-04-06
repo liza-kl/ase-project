@@ -5,7 +5,7 @@ import {CardComponent} from "../Card/card.component";
 export const CardGridComponent = (props) => {
     const useCases = props.useCases.map((useCase) => {
         return(
-            <Col xs={12} md={6} className="mb-3">
+            <Col xs={12} md={6} className="mb-3" key={useCase.id}>
             <CardComponent
             key={useCase.id}
             title={useCase.cardTitle}

@@ -4,7 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 
 export const GetRentalInstrumentsComponent = () => {
-    const [instruments,setInstrument] = useState([])
+    const [instruments, setInstrument] = useState([])
 
     const getRentalInstruments = useCallback(async () => {
         await axios.get(`http://localhost:9000/rentalinstruments`)
@@ -23,7 +23,7 @@ export const GetRentalInstrumentsComponent = () => {
         getRentalInstruments()
     }
 
-    return(
+    return (
         <div>
             <InstrumentsList>
                 <Table responsive>
@@ -37,13 +37,12 @@ export const GetRentalInstrumentsComponent = () => {
                     </thead>
                     <tbody>
                     {instruments.map(instrument =>
-                        <tr>
+                        <tr key={instrument.instrumentIdentification.instrumentSerialNumber + instrument.instrumentIdentification.instrumentManufacturer}>
                             <td>{instrument.instrumentIdentification.instrumentType}</td>
                             <td>{instrument.instrumentIdentification.instrumentSerialNumber}</td>
                             <td>{instrument.instrumentIdentification.instrumentManufacturer}</td>
                             <td>{instrument.quantity}</td>
                         </tr>
-
                     )}
                     </tbody>
                 </Table>

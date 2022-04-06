@@ -25,7 +25,7 @@ export const CreateMemberComponent = () => {
                 {
                     radioButtonsOptions.map(input => {
                         return (
-                            <Form.Check>
+                            <Form.Check key={input.id}>
                                 <RadioButtonInputComponent name={input.name} id={input.id} title={input.title} value={memberStatus}
                                                            onChange={(e) => setMemberStatus(e.target.value)} key={input.id}/>
                             </Form.Check>

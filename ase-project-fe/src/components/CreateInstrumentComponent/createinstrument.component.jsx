@@ -36,7 +36,7 @@ export const CreateInstrumentComponent = () => {
                 {
                     instrumentCategoryOptions.map(category => {
                         return (
-                            <Form.Check>
+                            <Form.Check key={category.id}>
                                 <RadioButtonInputComponent name={category.name} title={category.category}
                                                            value={instrumentCategory} key={category.id}
                                                            onChange={(e) => setInstrumentCategory(e.target.value)}/>
