@@ -1,0 +1,10 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  backend:
+    image: "docker.io/ase-project/backend:v.1.0"
+    ports:
+      - "9000:9000"
+  frontend:
+    image: "docker.io/ase-project/frontend:v.1.0"
+    ports:
+      - "3000:3000"
