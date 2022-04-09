@@ -10,6 +10,7 @@ plugins {
     kotlin("plugin.serialization") version "1.6.10"
 }
 
+
 repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }

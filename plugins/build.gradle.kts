@@ -4,10 +4,20 @@ val exposedVersion: String by project
 
 plugins {
     application
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 application {
-    mainClass.set("de.dhbw.ka.ApplicationKt")
+    mainClass.set("de.dhbw.ka.server.ApplicationKt")
+}
+
+
+tasks {
+    shadowJar {
+        manifest {
+            attributes(Pair("Main-Class", "io.ktor.server.netty.EngineMain"))
+        }
+    }
 }
 
 dependencies {
