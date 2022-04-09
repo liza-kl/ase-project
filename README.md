@@ -9,13 +9,20 @@ Software Project for the Advanced Software Engineering lecture at the Cooperativ
 git clone git@github.com:liza-kl/ase-project.git 
 ```
 
-2. Run the Backend
+2. Build Backend Image 
 ```
-./gradlew run 
+docker build -t ase-project/backend:latest -t ase-project/backend:v.1.0 . 
+```
+3.Build Docker Frontend Image 
+```
+cd ase-project-fe 
+docker build -t ase-project/frontend:latest -t ase-project/frontend:v.1.0 .
+```
+4. Spin up the Back- and Frontend
+```
+docker-compose up -d 
 ```
 
-3. Go to the Frontend Directory and run the npm script
-```
-cd ./ase-project-fe
-npm run start
-```
+
+
+
