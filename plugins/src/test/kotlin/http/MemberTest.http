@@ -15,6 +15,6 @@ Content-Type: application/json
 {
   "firstName": "Jonas",
   "lastName": "Miu",
-  "memberStatus": "ACTIVE"
+  "memberStatus": "PASSIVE"
 }
 

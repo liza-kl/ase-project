@@ -9,7 +9,6 @@ export const GetRentalInstrumentsComponent = () => {
     const getRentalInstruments = useCallback(async () => {
         await axios.get(`http://localhost:9000/rentalinstruments`)
             .then(res => {
-                console.log(res.data)
                 setInstrument(res.data)
             })
     }, []);
