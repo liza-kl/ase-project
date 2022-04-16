@@ -5,7 +5,6 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Application.configureRouting() {
-
     routing {
         get("/") {
             call.respondText("Musikvereinsverwaltung")

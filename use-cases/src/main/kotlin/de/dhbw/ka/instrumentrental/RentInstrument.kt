@@ -13,15 +13,21 @@ class RentInstrument(
     private val memberRepository: MemberRepository,
 ) {
 
-    fun execute(memberId: Int, instrumentData: InstrumentIdentification): Boolean {
-        val member = memberRepository.findById(id = memberId) ?: throw IllegalArgumentException("No Member with this Id")
-        val rentalInstrument = rentalInstrumentRepository.getRentalInstrumentByIdentification(instrumentData) ?: throw IllegalArgumentException("No Instrument with this Id")
-        val rentalApproved = RentalRequestService().approve(rentalRequest = RentalRequest(member,rentalInstrument))
+    fun execute(memberId: Int, instrumentData: InstrumentIdentification): Pair<Boolean, List<String>> {
+        val member =
+            memberRepository.findById(id = memberId) ?: throw IllegalArgumentException("No Member with this Id")
+        val rentalInstrument = rentalInstrumentRepository.getRentalInstrumentByIdentification(instrumentData)
+            ?: throw IllegalArgumentException("No Instrument with this Id")
+        val rentalRequestResult = RentalRequestService().approve(rentalRequest = RentalRequest(member, rentalInstrument))
 
-        if(rentalApproved) {
-            rentalInstrumentRepository.decreaseQuantity(instrumentData)
-            return instrumentRentalEntryRepository.rentInstrument(memberId, instrumentData)
+        return when (rentalRequestResult.approved) {
+            true -> Pair(rentalSucceed(instrumentData, memberId), listOf())
+            false -> Pair(false, rentalRequestResult.reasonsOfDenial)
         }
-        return false
+    }
+
+    private fun rentalSucceed(instrumentData: InstrumentIdentification, memberId: Int): Boolean {
+        rentalInstrumentRepository.decreaseQuantity(instrumentData)
+        return instrumentRentalEntryRepository.rentInstrument(memberId, instrumentData)
     }
 }

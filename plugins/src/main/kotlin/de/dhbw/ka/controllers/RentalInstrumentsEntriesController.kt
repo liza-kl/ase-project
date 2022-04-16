@@ -34,27 +34,28 @@ fun Route.rentInstrument() {
     post("/rental") {
         val receivedParams = call.receive<RentalInstrumentEntryDTO>()
         val rentInstrumentUC =
-            RentInstrument(
-                instrumentRentalEntryRepository,
-                rentalInstrumentRepository,
-                memberRepository,
+            RentInstrument(instrumentRentalEntryRepository, rentalInstrumentRepository, memberRepository)
+        val rentInstrumentResult = rentInstrumentUC.execute(
+            receivedParams.memberId, InstrumentIdentification(
+                instrumentManufacturer = receivedParams.instrumentIdentification.instrumentManufacturer,
+                instrumentSerialNumber = receivedParams.instrumentIdentification.instrumentSerialNumber,
+                instrumentType = receivedParams.instrumentIdentification.instrumentType
             )
-        try {
-            rentInstrumentUC.execute(
-                receivedParams.memberId,
-                InstrumentIdentification(
-                    instrumentManufacturer = receivedParams.instrumentIdentification.instrumentManufacturer,
-                    instrumentSerialNumber = receivedParams.instrumentIdentification.instrumentSerialNumber,
-                    instrumentType = receivedParams.instrumentIdentification.instrumentType
-                )
-
+        )
+        when (rentInstrumentResult) {
+            Pair(true, listOf("")) -> call.respondText(
+                "Successfully borrowed an Instrument",
+                status = HttpStatusCode.Created
             )
-            call.respondText("Successfully borrowed an Instrument", status = HttpStatusCode.Created)
-        } catch (e: IllegalArgumentException) {
-            call.respondText("Oh no something went wrong! ${e.message}", status = HttpStatusCode.Forbidden)
+            Pair(
+                false,
+                rentInstrumentResult.second
+            ) -> call.respondText(
+                "Oh no something went wrong, the reason(s) is / are! + ${rentInstrumentResult.second} ",
+                status = HttpStatusCode.BadRequest
+            )
         }
     }
-
 }
 
 
