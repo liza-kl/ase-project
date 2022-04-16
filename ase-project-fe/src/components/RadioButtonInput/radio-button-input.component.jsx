@@ -9,6 +9,7 @@ export const RadioButtonInputComponent = (props) => {
                 name={props.name}
                 id={props.id}
                 label={props.title}
+                value={props.value}
             />
         </div>
     );

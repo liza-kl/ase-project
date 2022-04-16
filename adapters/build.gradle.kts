@@ -1,5 +1,6 @@
 val ktorVersion: String by project
 val exposedVersion: String by project
+
 dependencies {
     implementation(projects.useCases)
     implementation(projects.domain)

@@ -56,7 +56,7 @@ fun Route.addMember() {
         try {
             createNewMemberUC.execute(toMember(receivedMemberParams))
             call.respondText(
-                "Successfully created the member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
+                "Successfully created the ${receivedMemberParams.memberStatus} member ${receivedMemberParams.firstName} ${receivedMemberParams.lastName} with the id ${receivedMemberParams.id}! ",
                 status = HttpStatusCode.OK
             )
         } catch(e : Exception ) {
