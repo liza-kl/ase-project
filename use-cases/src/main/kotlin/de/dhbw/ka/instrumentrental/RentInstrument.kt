@@ -22,6 +22,6 @@ class RentInstrument(
             rentalInstrumentRepository.decreaseQuantity(instrumentData)
             return instrumentRentalEntryRepository.rentInstrument(memberId, instrumentData)
         }
-        throw IllegalArgumentException("Something went wrong")
+        return false
     }
 }
