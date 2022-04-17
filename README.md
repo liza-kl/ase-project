@@ -10,6 +10,10 @@ Software Project for the Advanced Software Engineering lecture at the Cooperativ
 ```
 git clone git@github.com:liza-kl/ase-project.git 
 ```
+or
+```
+git clone https://github.com/liza-kl/ase-project.git
+```
 
 2. Build the Docker Backend Image 
 ```
