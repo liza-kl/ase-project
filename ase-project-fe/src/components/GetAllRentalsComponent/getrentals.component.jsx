@@ -10,6 +10,7 @@ export const GetRentalsComponent = () => {
         await axios.get(`http://localhost:9000/rental`)
             .then(res => {
                 setRentals(res.data)
+                console.log(res.data)
             })
     }, []);
 
@@ -31,8 +32,8 @@ export const GetRentalsComponent = () => {
                         <th>Rental Id</th>
                         <th>Member Id</th>
                         <th>Instrument Type</th>
-                        <th>Instrument Serial Number</th>
                         <th>Instrument Manufacturer</th>
+                        <th>Instrument Serial Number</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,8 +42,8 @@ export const GetRentalsComponent = () => {
                             <td>{rental.rentalId}</td>
                             <td>{rental.memberId}</td>
                             <td>{rental.instrumentIdentification.instrumentType}</td>
-                            <td>{rental.instrumentIdentification.instrumentSerialNumber}</td>
                             <td>{rental.instrumentIdentification.instrumentManufacturer}</td>
+                            <td>{rental.instrumentIdentification.instrumentSerialNumber}</td>
                         </tr>
 
                     )}

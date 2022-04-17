@@ -38,8 +38,8 @@ export const GetRentalInstrumentsComponent = () => {
                     {instruments.map(instrument =>
                         <tr key={instrument.instrumentIdentification.instrumentSerialNumber + instrument.instrumentIdentification.instrumentManufacturer}>
                             <td>{instrument.instrumentIdentification.instrumentType}</td>
-                            <td>{instrument.instrumentIdentification.instrumentSerialNumber}</td>
                             <td>{instrument.instrumentIdentification.instrumentManufacturer}</td>
+                            <td>{instrument.instrumentIdentification.instrumentSerialNumber}</td>
                             <td>{instrument.quantity}</td>
                         </tr>
                     )}

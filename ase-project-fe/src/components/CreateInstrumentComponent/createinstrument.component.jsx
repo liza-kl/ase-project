@@ -28,23 +28,13 @@ export const CreateInstrumentComponent = () => {
 
                 <Form.Control type="text" name="instrumentManufacturer" onChange={(e) => setInstrumentManufacturer(e.target.value)}
                               placeholder="Instrument Manufacturer" className="mb-1" value={instrumentManufacturer}/>
-
                 <Form.Control type="text" name="instrumentSerialNumber" onChange={(e) => setInstrumentSerialNumber(e.target.value)}
                               placeholder="Instrument Serial Number" className="mb-1" value={instrumentSerialNumber}/>
-
-                <RadioButtons>
-                {
-                    instrumentCategoryOptions.map(category => {
-                        return (
-                            <Form.Check key={category.id}>
-                                <RadioButtonInputComponent name={category.name} title={category.category}
-                                                           value={instrumentCategory} key={category.id}
-                                                           onChange={(e) => setInstrumentCategory(e.target.value)}/>
-                            </Form.Check>
-                        )
-                    })
-                }
-                </RadioButtons>
+                <Form.Select onChange={(e) => setInstrumentCategory(e.target.value)} value={instrumentCategory} name="instrumentCategory">
+                    {instrumentCategoryOptions.map(category => {
+                       return <option key={category.id}>{category.category}</option>
+                    })}
+                </Form.Select>
             </Form.Group>
             <Button variant="secondary" type="submit" className="w-100" onClick={onSubmit}>
                 Create Instrument

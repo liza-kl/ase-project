@@ -5,8 +5,8 @@ export function createRentalEntry(urlToPost, rentalInstrumentData) {
         memberId: rentalInstrumentData.memberId,
         instrumentIdentification: {
             instrumentType: rentalInstrumentData.instrumentType,
-            instrumentManufacturer: rentalInstrumentData.instrumentManufacturer,
             instrumentSerialNumber: rentalInstrumentData.instrumentSerialNumber,
+            instrumentManufacturer: rentalInstrumentData.instrumentManufacturer,
         },
     })
         .then(function (response) {
