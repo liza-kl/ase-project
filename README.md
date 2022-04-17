@@ -1,6 +1,9 @@
-# ase-project
+# Project for the Advanced Software Engineering Course
 Software Project for the Advanced Software Engineering lecture at the Cooperative State University Karlsruhe. The aim is to get to know basic principles of Domain Driven Design, Programming Principle, Clean Architecture and so on.
 
+# Documentation
+
+[Link to the pdf](https://github.com/liza-kl/ase-project/blob/main/doc/ASE_Documentation.pdf)
 # Installation
 
 1. Clone Repository and go to the project root directory
