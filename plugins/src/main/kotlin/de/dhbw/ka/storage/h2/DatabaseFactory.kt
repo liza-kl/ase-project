@@ -64,7 +64,7 @@ object DatabaseFactory {
         transaction {
             InstrumentTable.insert {
                 it[instrumentType] = SAMPLE_INSTRUMENT_TYPE
-                it[instrumentSerialNumber] = SAMPLE_INSTRUMENT_TYPE
+                it[instrumentSerialNumber] = SAMPLE_SERIAL_NUMBER
                 it[instrumentManufacturer] = SAMPLE_MANUFACTURER
                 it[instrumentCategory] = "BRASS"
             }
