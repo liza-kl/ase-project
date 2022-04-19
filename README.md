@@ -3,12 +3,12 @@ Software Project for the Advanced Software Engineering lecture at the Cooperativ
 
 # Useful Links
 
-[🧭 Project Proposal GER](https://github.com/liza-kl/ase-project/blob/main/doc/ASE_Themeneinreichung.pdf)
-[📝 Documentation GER](https://github.com/liza-kl/ase-project/blob/main/doc/ASE_Documentation.pdf)
-[✅ Entity Test Classes](https://github.com/liza-kl/ase-project/blob/main/domain/src/test/kotlin/EntitiesTestClass.kt)
-[✅ Value Objects Test Classes (3)](https://github.com/liza-kl/ase-project/blob/main/domain/src/test/kotlin/VOTestClass.kt)
-[✅ Controller Test Classes (4)](https://github.com/liza-kl/ase-project/blob/main/plugins/src/test/kotlin/de/dhbw/ka/controllers/ControllerTests.kt)
-[🎨 Design Pattern UML](https://github.com/liza-kl/ase-project/blob/main/doc/SpecificationPatternUML.png)
+- [🧭 Project Proposal GER](https://github.com/liza-kl/ase-project/blob/main/doc/ASE_Themeneinreichung.pdf)
+- [📝 Documentation GER](https://github.com/liza-kl/ase-project/blob/main/doc/ASE_Documentation.pdf)
+- [✅ Entity Test Classes](https://github.com/liza-kl/ase-project/blob/main/domain/src/test/kotlin/EntitiesTestClass.kt)
+- [✅ Value Objects Test Classes (3)](https://github.com/liza-kl/ase-project/blob/main/domain/src/test/kotlin/VOTestClass.kt)
+- [✅ Controller Test Classes (4)](https://github.com/liza-kl/ase-project/blob/main/plugins/src/test/kotlin/de/dhbw/ka/controllers/ControllerTests.kt)
+- [🎨 Design Pattern UML](https://github.com/liza-kl/ase-project/blob/main/doc/SpecificationPatternUML.png)
 
 # Installation
 
